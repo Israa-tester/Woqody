@@ -36,6 +36,7 @@ public class AddingEmployeesForOrganization {
         OrganizationsPage.EmpAddingMessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.EmpAddingMessage(dashAdmin.driver).getText();
         System.out.println(actual);
+        //Test
         String expected = "User add to organization successfully";
         Assert.assertEquals(actual, expected);
 
