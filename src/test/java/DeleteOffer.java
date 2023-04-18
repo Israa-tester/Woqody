@@ -94,7 +94,7 @@ public class DeleteOffer {
         System.out.println(actual);
         String expected = "Row deleted successfully";
         Assert.assertEquals(actual, expected);
-
+        // Finish delete
     }
 
     @AfterMethod
