@@ -35,7 +35,12 @@ public class Cards {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardStock(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_stockId']"));
+        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
+        return element;
+    }
+    //-----------------------------------------------------------------------------------------
+    public static WebElement EnterpriseBalance(WebDriver driver) {
+        element = driver.findElement(By.xpath("//span[@class='ant-tag ant-tag-green']"));
         return element;
     }
 
@@ -46,26 +51,20 @@ public class Cards {
     }
 
     //-----------------------------------------------------------------------------------------
-    public static WebElement CardCurrency(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_currencyId']"));
-        return element;
-    }
-
-    //-----------------------------------------------------------------------------------------
     public static WebElement CardUser(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_userId']"));
+        element = driver.findElement(By.xpath("//div[@class='ant-legacy-form-item-control']//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
-    public static WebElement CardEnableOverhead(WebDriver driver) {
-        element = driver.findElement(By.xpath("//button[@id='cards_form_isOverdraftEnabled']"));
+    public static WebElement CardEnableOverDraft(WebDriver driver) {
+        element = driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[8]/div[1]/div[2]/div[1]/span[1]/button[1]"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
-    public static WebElement CardOverheadLimit(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_overdraftLimit']"));
+    public static WebElement CardOverDraftLimit(WebDriver driver) {
+        element = driver.findElement(By.id("cards_form_overdraftLimit"));
         return element;
     }
 
@@ -95,7 +94,7 @@ public class Cards {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardEnableLimit(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[10]/div[1]/div[1]/div[1]/button[1]"));
+        element = driver.findElement(By.xpath("(//button[@role='switch'])[5]"));
         return element;
     }
 
@@ -174,6 +173,21 @@ public class Cards {
          return element;
      }
     //------------------------------------------------------------------------------------------
+    public static WebElement AmountCard(WebDriver driver) {
+        element = driver.findElement(By.xpath("//span[@class='ant-descriptions-item-content']//span[@class='ant-tag ant-tag-has-color']"));
+        return element;
+    }
+    //------------------------------------------------------------------------------------------
+    public static WebElement ClosePopup(WebDriver driver) {
+        element = driver.findElement(By.xpath("//button[@aria-label='Close']"));
+        return element;
+    }
+    //------------------------------------------------------------------------------------------
+    public static WebElement OrgBalanceInTopup(WebDriver driver) {
+        element = driver.findElement(By.xpath("//span[@class='ant-tag ant-tag-green']"));
+        return element;
+    }
+    //------------------------------------------------------------------------------------------
     //------------------Bulk of Card Form-------------------------
      public static WebElement BulkOfCardsLink(WebDriver driver) {
          element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[3]/button[1]"));
@@ -186,12 +200,12 @@ public class Cards {
     }
     //------------------------------------------------------------------------------------------
     public static WebElement BulkEmployees(WebDriver driver) {
-        element = driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/label[1]/span[1]/input[1]"));
+        element = driver.findElement(By.xpath("//div[@class='ant-table-selection']//span[@class='ant-checkbox']"));
         return element;
     }
     //------------------------------------------------------------------------------------------
     public static WebElement BulkEnableLimit(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[5]/div[1]/div[1]/div[1]/button[1]"));
+        element = driver.findElement(By.xpath("(//button[@role='switch'])[1]"));
         return element;
     }
     //------------------------------------------------------------------------------------------
@@ -203,7 +217,7 @@ public class Cards {
     }
     //------------------------------------------------------------------------------------------
     public static WebElement StockUploadCard(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_bulk_form_stockId']"));
+        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
         return element;
     }
     //------------------------------------------------------------------------------------------
