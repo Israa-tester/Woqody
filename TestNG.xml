@@ -1,0 +1,17 @@
+<suite name="Suite">
+    <test name="Test">
+      <Classes>
+        <class name="test.java.CreateOrg"> </class>
+
+
+
+
+
+
+
+
+
+      </Classes>
+    </test>
+
+</suite>

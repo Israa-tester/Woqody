@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class CreateOrg {
     BeforeAndAfter dashAdmin;
+
     @BeforeMethod
     public void CreateNewOrg(){
 
@@ -22,8 +24,8 @@ public class CreateOrg {
     @Test(priority = 0)
     public void CreateNormalOrg(){
 
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys("AutoNormalOrg");
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("Mansoura,Al-Galaa");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgNormalName);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.OrgAddress);
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
@@ -38,10 +40,10 @@ public class CreateOrg {
 
         OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver).click();
         OrganizationsPage.NewOrganizationstopup(dashAdmin.driver).click();
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys("AutoTopup");
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("Mansoura,Al-Galaa");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgTopupName);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.OrgAddress);
         OrganizationsPage.OrganizationFualAndTopupBalance(dashAdmin.driver).click();
-        OrganizationsPage.OrganizationChargeLimit(dashAdmin.driver).sendKeys("100");
+        OrganizationsPage.OrganizationChargeLimit(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.OrganizationChargeLimitTopup));
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
@@ -55,11 +57,11 @@ public class CreateOrg {
 
         OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver).click();
         OrganizationsPage.NewOrganizationEnterprise(dashAdmin.driver).click();
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys("AutoEnterprise");
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("Mansoura,Al-Galaa");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgEnterpriseName);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.OrgAddress);
         OrganizationsPage.OrganizationEnterpriseBalance(dashAdmin.driver).click();
-        OrganizationsPage.OrganizationBalanceUpdate(dashAdmin.driver).sendKeys("100");
-        OrganizationsPage.OrganizationBalanceEnterpriseAttachment(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\spring-images-min.jpg");
+        OrganizationsPage.OrganizationBalanceUpdate(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.OrganizationBalanceUpdateEnterprise));
+        OrganizationsPage.OrganizationBalanceEnterpriseAttachment(dashAdmin.driver).sendKeys(dashAdmin.OrganizationBalanceEnterpriseAttachment);
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
@@ -69,29 +71,26 @@ public class CreateOrg {
     }
     @Test(priority = 3)
     public void CreateFuelBackOrg(){
-
-
-        OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver).click();
+        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
+        jes.executeScript("arguments[0].click()", OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver));
+        //OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver).click();
         OrganizationsPage.NewOrganizationFuelBack(dashAdmin.driver).click();
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys("AutoFuelback");
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("Mansoura,Al-Galaa");
-        OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys("6000");;
-        OrganizationsPage.FuelBackPercentageForUser(dashAdmin.driver).sendKeys("3");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgFuelBackName);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.OrgAddress);
+        OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.FuelBackLimit));
+        OrganizationsPage.FuelBackPercentageForUser(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.FuelBackPercentageForUser));
         /////// Valid until/////////
 
-        String fromDay = "25";
-        String toDay= "31";
         OrganizationsPage.ValidUntilFrom(dashAdmin.driver).click();
-        List<WebElement> allDatesFrom= dashAdmin.driver.findElements(By.xpath("//body[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/table[1]//td"));
-        for(WebElement ele:allDatesFrom){
-            String dt1= ele.getText();
-            if (dt1.equals(fromDay))  ele.click();
-        }
+        List<WebElement> allDatesFrom= dashAdmin.driver.findElements(By.xpath( dashAdmin.xpathMonthFualBack));
         for(WebElement ele1:allDatesFrom){
-            String dt2= ele1.getText();
-            if (dt2.equals(toDay))  ele1.click();
+            String dt1= ele1.getText();
+            if (dt1.equals(dashAdmin.fromDayFualBack))  ele1.click();
         }
-
+        for(WebElement ele2:allDatesFrom){
+            String dt2= ele2.getText();
+            if (dt2.equals(dashAdmin.toDayFualBack))  ele2.click();
+        }
         //////////////////////////////
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();

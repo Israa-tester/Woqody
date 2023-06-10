@@ -1,7 +1,7 @@
 import Pages.OrganizationsPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -22,14 +22,16 @@ public class DeleteOrgs {
 
     }
     @Test(priority = 0)
-    public void DeleteNormalOrg() throws InterruptedException
+    public void DeleteNormalOrg()
     {
-        // Click on Delete icon for special Vendor
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='Topup']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Delete icon for special Org
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(50));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteNormalOrg +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        Thread.sleep(1000);
         OrganizationsPage.DeleteButton(dashAdmin.driver).click();
         OrganizationsPage.OrgDeleteMessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.OrgDeleteMessage(dashAdmin.driver).getText();
@@ -41,12 +43,14 @@ public class DeleteOrgs {
     @Test(priority = 1)
     public void DeleteEnterpriseOrg() throws InterruptedException
     {
-        // Click on Delete icon for special Vendor
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoEnterpriseS1']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Delete icon for special Org
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(50));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteEnterpriseOrg +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        Thread.sleep(1000);
         OrganizationsPage.DeleteButton(dashAdmin.driver).click();
         OrganizationsPage.OrgDeleteMessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.OrgDeleteMessage(dashAdmin.driver).getText();
@@ -56,14 +60,16 @@ public class DeleteOrgs {
     }
 
     @Test(priority = 2)
-    public void DeleteFuelBackOrg() throws InterruptedException
+    public void DeleteFuelBackOrg()
     {
-        // Click on Delete icon for special Vendor
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='الواقواق']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Delete icon for special Org
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(50));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteFuelBackOrg +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-       Thread.sleep(1000);
         OrganizationsPage.DeleteButton(dashAdmin.driver).click();
         OrganizationsPage.OrgDeleteMessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.OrgDeleteMessage(dashAdmin.driver).getText();

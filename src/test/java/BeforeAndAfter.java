@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
-public class BeforeAndAfter {
+public class BeforeAndAfter extends VariablesData{
 
     WebDriver driver;
     public void OpenDashboard(){

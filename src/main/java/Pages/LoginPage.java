@@ -10,19 +10,19 @@ public class LoginPage {
     //------------------------------------------------------------------------------------------------
     public static WebElement  loginusername (WebDriver driver )
     {
-        element = driver.findElement(By.xpath("//*[@id=\"login_email\"]"));
+        element = driver.findElement(By.xpath("//input[@placeholder='E-mail']"));
         return element;
     }
 
     public static WebElement  loginpassword(WebDriver driver )
     {
-        element = driver.findElement(By.xpath("//*[@id=\"login_password\"]"));
+        element = driver.findElement(By.xpath("//input[@placeholder='Password']"));
         return element;
     }
 
     public static WebElement loginbutton(WebDriver driver )
     {
-        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/form/div[3]/div/div/span/button"));
+        element = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
         return element;
     }
 

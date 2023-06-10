@@ -1,5 +1,6 @@
 import Pages.OrganizationsPage;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,20 +18,26 @@ public class EditOrg {
         dashAdmin= new BeforeAndAfter();
         dashAdmin.OpenDashboard();
         OrganizationsPage.Organizationslink(dashAdmin.driver).click();
+        //Scroll the page to display the table///
+        JavascriptExecutor js = (JavascriptExecutor) dashAdmin.driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
     @Test(priority = 0)
-    public void EditNormalOrg(){
+    public void EditNormalOrg() {
 
-        // Click on edit icon for special normal organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='NormalQQ']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Edit icon for special deal
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.OrgNormalName +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Organization')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(" Org");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.editOrgName);
         OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.DELETE);
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("TanTa,Al-Galaa");
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.editOrgAddress);
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();
@@ -41,21 +48,24 @@ public class EditOrg {
     }
 
     @Test(priority = 1)
-    public void EditTopUpOrg() throws InterruptedException {
-        // Click on edit icon for special topup organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='Topup']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+    public void EditTopUpOrg() {
+        // Click on Edit icon for special deal
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.OrgTopupName +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(" Org");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.editOrgName);
         OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.DELETE);
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("TanTa,Al-Galaa");
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.editOrgAddress);
         OrganizationsPage.OrganizationFualAndTopupBalance(dashAdmin.driver).click();
         OrganizationsPage.OrganizationChargeLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         OrganizationsPage.OrganizationChargeLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
-        OrganizationsPage.OrganizationChargeLimit(dashAdmin.driver).sendKeys("55");
-        Thread.sleep(1000);
+        OrganizationsPage.OrganizationChargeLimit(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.editChargeLimitTopup));
+        //Thread.sleep(1000);
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();
@@ -68,18 +78,21 @@ public class EditOrg {
     @Test(priority = 2)
     public void EditEnterpriseOrg(){
 
-        // Click on edit icon for special enterprise organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoEnterprise']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Edit icon for special deal
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.OrgEnterpriseName +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys("S1");
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys("Mansoura,Al-Galaa");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.editOrgName);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.DELETE);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.editOrgAddress);
         OrganizationsPage.OrganizationEnterpriseBalance(dashAdmin.driver).click();
-
-        OrganizationsPage.OrganizationBalanceUpdate(dashAdmin.driver).sendKeys("550");
-        OrganizationsPage.OrganizationBalanceEnterpriseAttachment(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\spring-images-min.jpg");
+        OrganizationsPage.OrganizationBalanceUpdate(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.editEnterpriseBalance));
+        OrganizationsPage.OrganizationBalanceEnterpriseAttachment(dashAdmin.driver).sendKeys(dashAdmin.OrganizationBalanceEnterpriseAttachment);
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();
@@ -91,32 +104,34 @@ public class EditOrg {
     public void EditFuelBackOrg(){
 
         // Click on edit icon for special fuelback organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='Eman Helmy']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.OrgFuelBackName +"']//parent::tr//td[8]")));
+
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(Keys.DELETE);
-        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys("EditFuelback");
-        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(" متغير ");
+        OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.editOrgName);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(Keys.DELETE);
+        OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.editOrgAddress);
+        OrganizationsPage.OrganizationEnterpriseBalance(dashAdmin.driver).click();
         OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys(Keys.DELETE);
-        OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys("6000");
-        OrganizationsPage.FuelBackPercentageForUser(dashAdmin.driver).sendKeys("2");
-       /////// Valid until/////////
-        String fromDay = "25";
-        String toDay= "30";
+        OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.editFuelBackLimit));
+        OrganizationsPage.FuelBackPercentageForUser(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.editFuelBackPercentage));
+        /////// Valid until/////////
         OrganizationsPage.ValidUntilFrom(dashAdmin.driver).click();
-        List<WebElement> allDatesFrom= dashAdmin.driver.findElements(By.xpath("//body[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/table[1]//td"));
-        for(WebElement ele:allDatesFrom){
-            String dt1= ele.getText();
-            if (dt1.equals(fromDay))  ele.click();
-        }
+        List<WebElement> allDatesFrom= dashAdmin.driver.findElements(By.xpath(dashAdmin.xpathMonthFualBack));
         for(WebElement ele1:allDatesFrom){
-            String dt2= ele1.getText();
-            if (dt2.equals(toDay))  ele1.click();
+            String dt1= ele1.getText();
+            if (dt1.equals(dashAdmin.editFromDayFualBack))  ele1.click();
         }
-
+        for(WebElement ele2:allDatesFrom){
+            String dt2= ele2.getText();
+            if (dt2.equals(dashAdmin.editToDayFualBack))  ele2.click();
+        }
         //////////////////////////////
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.OrganizationEditconfirmationmessage(dashAdmin.driver).getText();

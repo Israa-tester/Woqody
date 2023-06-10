@@ -1,13 +1,7 @@
 package Pages;
-
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class OrganizationsPage 
@@ -17,21 +11,21 @@ public class OrganizationsPage
 	public static WebElement  Organizationslink (WebDriver driver)
 
 	{
-		element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[2]/span[1]/a[1]"));
+		element = driver.findElement(By.xpath("//a[@href='/organizations']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  NewOrganizationslink (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//span[contains(text(),'New Organization')]"));
+		element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-primary']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  OrganizationSettingsCollapse (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/span[1]/*[1]"));
+		element = driver.findElement(By.xpath("//div[@class='ant-collapse ant-collapse-icon-position-left']//div[@role='button']"));
 		
 		return element;		
 	}
@@ -39,14 +33,14 @@ public class OrganizationsPage
 	public static WebElement  NewOrganizationstopup (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//*[@id=\"orgs_form_canAddTopupMembers\"]"));
+		element = driver.findElement(By.xpath("(//button[@role='switch'])[1]"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  NewOrganizationFuelBack (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//span[contains(text(),'Fuel Back Disabled')]"));
+		element = driver.findElement(By.xpath("//div[@class='ant-legacy-form-item-control']//button[@role='switch']"));
 		return element;		
 	}
 	
@@ -54,7 +48,7 @@ public class OrganizationsPage
 	public static WebElement  NewOrganizationEnterprise (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//span[contains(text(),'Enterprise disabled')]"));
+		element = driver.findElement(By.xpath("(//button[@role='switch'])[3]"));
 		return element;		
 	}
 	
@@ -62,7 +56,7 @@ public class OrganizationsPage
 	public static WebElement  Organizationname (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//*[@id=\"orgs_form_name\"]"));
+		element = driver.findElement(By.xpath("//div[@class='flex column']//div[1]//div[1]//div[2]//div[1]//span[1]//input[1]"));
 		return element;		
 	}
 	
@@ -70,21 +64,21 @@ public class OrganizationsPage
 	public static WebElement  Organizationaddress (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='orgs_form_address']"));
+		element = driver.findElement(By.xpath("(//input[contains(@type,'text')])[7]"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  OrganizationEnterpriseBalance (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[4]/div[2]/div[1]/div[1]/span[1]/*[1]"));
+		element = driver.findElement(By.xpath("//div[@role='tablist']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  OrganizationBalanceUpdate (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='orgs_form_balance']"));
+		element = driver.findElement(By.xpath("//input[@role='spinbutton']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
@@ -98,7 +92,7 @@ public class OrganizationsPage
 	public static WebElement  OrganizationFualAndTopupBalance (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[4]/div[3]/div[1]/div[1]/span[1]/*[1]"));
+		element = driver.findElement(By.xpath("//div[contains(text(),'Fuel Back and Top-Up balance')]"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
@@ -106,7 +100,7 @@ public class OrganizationsPage
 	public static WebElement  OrganizationChargeLimit (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='orgs_form_topupChargeLimit']"));
+		element = driver.findElement(By.xpath("//div[@class='ant-input-number']//input[@role='spinbutton']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
@@ -115,21 +109,21 @@ public class OrganizationsPage
 	public static WebElement  FuelBackLimitOrganization (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='orgs_form_maxLimit']"));
+		element = driver.findElement(By.xpath("(//input[@placeholder='0'])[1]"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  FuelBackPercentageForUser (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='orgs_form_trxLimit']"));
+		element = driver.findElement(By.xpath("//input[@placeholder='0%']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  ValidUntilFrom (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='orgs_form_validUntil']"));
+		element = driver.findElement(By.xpath("//input[@placeholder='From']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
@@ -166,7 +160,7 @@ public class OrganizationsPage
 	//------------------------------------------------------------------------------------------
 
 	public static WebElement DeleteButton(WebDriver driver) {
-		element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+		element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-dangerous']"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------
