@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -10,7 +11,8 @@ import java.util.List;
 
 
 public class CreateOrg {
-    BeforeAndAfter dashAdmin;
+
+    public static BeforeAndAfter dashAdmin;
 
     @BeforeMethod
     public void CreateNewOrg(){
@@ -21,7 +23,7 @@ public class CreateOrg {
         OrganizationsPage.NewOrganizationslink(dashAdmin.driver).click();
     }
 
-    @Test(priority = 0)
+    @Test(groups = { "NormalOrg" })
     public void CreateNormalOrg(){
 
         OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgNormalName);
@@ -33,8 +35,9 @@ public class CreateOrg {
         String expected = "New organization successfully";
         Assert.assertEquals(actual, expected);
 
+
     }
-    @Test(priority = 1)
+    @Test
     public void CreateTopUpOrg(){
 
 
@@ -52,15 +55,15 @@ public class CreateOrg {
         Assert.assertEquals(actual, expected);
 
     }
-    @Test(priority = 2)
-    public void CreateEnterpriseOrg() throws InterruptedException {
+    @Test(priority = 2 , groups = {"EnterpriseOrg"})
+    public void CreateEnterpriseOrg() {
 
         OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver).click();
         OrganizationsPage.NewOrganizationEnterprise(dashAdmin.driver).click();
         OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgEnterpriseName);
         OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.OrgAddress);
         OrganizationsPage.OrganizationEnterpriseBalance(dashAdmin.driver).click();
-        OrganizationsPage.OrganizationBalanceUpdate(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.OrganizationBalanceUpdateEnterprise));
+        OrganizationsPage.OrganizationBalanceUpdate(dashAdmin.driver).sendKeys(dashAdmin.OrganizationBalanceUpdateEnterprise);
         OrganizationsPage.OrganizationBalanceEnterpriseAttachment(dashAdmin.driver).sendKeys(dashAdmin.OrganizationBalanceEnterpriseAttachment);
         OrganizationsPage.Organizationsave(dashAdmin.driver).click();
         OrganizationsPage.Organizationsaveconfirmationmessage(dashAdmin.driver).getText();
@@ -69,16 +72,15 @@ public class CreateOrg {
         String expected = "New organization successfully";
         Assert.assertEquals(actual, expected);
     }
-    @Test(priority = 3)
+    @Test(priority = 3 , groups = {"FuelBackOrg"})
     public void CreateFuelBackOrg(){
         JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
         jes.executeScript("arguments[0].click()", OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver));
-        //OrganizationsPage.OrganizationSettingsCollapse(dashAdmin.driver).click();
         OrganizationsPage.NewOrganizationFuelBack(dashAdmin.driver).click();
         OrganizationsPage.Organizationname(dashAdmin.driver).sendKeys(dashAdmin.OrgFuelBackName);
         OrganizationsPage.Organizationaddress(dashAdmin.driver).sendKeys(dashAdmin.OrgAddress);
-        OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.FuelBackLimit));
-        OrganizationsPage.FuelBackPercentageForUser(dashAdmin.driver).sendKeys(Float.toString(dashAdmin.FuelBackPercentageForUser));
+        OrganizationsPage.FuelBackLimitOrganization(dashAdmin.driver).sendKeys(dashAdmin.FuelBackLimit);
+        OrganizationsPage.FuelBackPercentageForUser(dashAdmin.driver).sendKeys(dashAdmin.FuelBackPercentageForUser);
         /////// Valid until/////////
 
         OrganizationsPage.ValidUntilFrom(dashAdmin.driver).click();
@@ -105,5 +107,7 @@ public class CreateOrg {
     public void CloseBrowser(){
         dashAdmin.CloseDashboard();
     }
+
+
 
 }

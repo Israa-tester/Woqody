@@ -1,0 +1,77 @@
+<suite name="OrgSuite">
+    <listeners>
+        <listener class-name="Listener"></listener>
+    </listeners>
+  <test name="NormalOrg">
+       <classes>
+         <class name="CreateOrg">
+             <methods>
+                 <include name="CreateNormalOrg"/>
+             </methods>
+         </class>
+           <class name="EditOrg">
+               <methods>
+                   <include name="EditNormalOrg"/>
+               </methods>
+           </class>
+           <class name="DeleteOrgs">
+               <methods>
+                   <include name="DeleteNormalOrg"/>
+               </methods>
+           </class>
+       </classes>
+    </test>
+    <test name="TopUpOrg">
+        <classes>
+            <class name="CreateOrg">
+                <methods>
+                    <include name="CreateTopUpOrg"/>
+                </methods>
+            </class>
+            <class name="EditOrg">
+                <methods>
+                    <include name="EditTopUpOrg"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="EnterpriseOrg">
+        <classes>
+            <class name="CreateOrg">
+                <methods>
+                    <include name="CreateEnterpriseOrg"/>
+                </methods>
+            </class>
+            <class name="EditOrg">
+                <methods>
+                    <include name="EditEnterpriseOrg"/>
+                </methods>
+            </class>
+            <class name="DeleteOrgs">
+                <methods>
+                    <include name="DeleteEnterpriseOrg"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="FuelBackOrg">
+        <classes>
+            <class name="CreateOrg">
+                <methods>
+                    <include name="CreateFuelBackOrg"/>
+                </methods>
+            </class>
+            <class name="EditOrg">
+                <methods>
+                    <include name="EditFuelBackOrg"/>
+                </methods>
+            </class>
+            <class name="DeleteOrgs">
+                <methods>
+                    <include name="DeleteFuelBackOrg"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -28,9 +29,9 @@ public class DeleteVenue {
 
     }
     @Test(priority = 0)
-    public void DeleteNormalVendor() throws InterruptedException
+    public void DeleteNormalVenue() throws InterruptedException
     {
-        // Click on Delete icon for special Vendor
+        // Click on Delete icon for special Venue
         WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='dss']//parent::tr//button[3][@type='button']")));
         ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
@@ -45,12 +46,15 @@ public class DeleteVenue {
     }
 
     @Test(priority = 1)
-    public void DeleteFualBackVendor() throws InterruptedException
+    public void DeleteFuelBackVenue() throws InterruptedException
     {
-        // Click on edit icon for special Employee card
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='deliveryVenue']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Edit icon for special fuelBack venue
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.venueFuelBackEditName +"']//parent::tr//td[12]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         Thread.sleep(1000);
         VenuesPage.DeleteButton(dashAdmin.driver).click();
@@ -61,7 +65,25 @@ public class DeleteVenue {
         Assert.assertEquals(actual, expected);
     }
 
-
+    @Test(priority = 2)
+    public void DeleteDeliveryVenue() throws InterruptedException
+    {
+        // Click on Edit icon for special delivery venue
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.venueDeliveryName +"']//parent::tr//td[12]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
+        /////////////////////////////////////////////////////////////////////////
+        Thread.sleep(1000);
+        VenuesPage.DeleteButton(dashAdmin.driver).click();
+        VenuesPage.VenueDeleteMessage(dashAdmin.driver).getText();
+        String actual  = VenuesPage.VenueDeleteMessage(dashAdmin.driver).getText();
+        System.out.println(actual);
+        String expected = "Row deleted successfully";
+        Assert.assertEquals(actual, expected);
+    }
 
 
     @AfterMethod

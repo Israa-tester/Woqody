@@ -1,0 +1,78 @@
+<suite name="VehicleSuit">
+    <listeners>
+        <listener class-name="Listener"></listener>
+    </listeners>
+    <test name="VehicleStock">
+        <classes>
+            <class name="CreateOrg">
+                <methods>
+                    <include name="CreateEnterpriseOrg"/>
+                </methods>
+            </class>
+            <class name="CreateStock">
+                <methods>
+                    <include name="CreateVehicleStock"/>
+                </methods>
+            </class>
+            <class name="EditStock">
+                <methods>
+                    <include name="EditVehicleStock"/>
+                </methods>
+            </class>
+            <class name="DeleteStock">
+                <methods>
+                    <include name="DeleteVehicleStock"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="SingleVehicleCards">
+        <classes>
+            <class name="CreateStock">
+                <methods>
+                    <include name="CreateVehicleStock"/>
+                </methods>
+            </class>
+            <class name="CreateSingleCards">
+                <methods>
+                    <include name="CreateVehicleCard"/>
+                </methods>
+            </class>
+            <class name="TopUpCards">
+                <methods>
+                    <include name="TopupVehicleCard"/>
+                    <include name="DeductVehicleCard"/>
+                </methods>
+            </class>
+            <class name="EditCard">
+                <methods>
+                    <include name="EditVehicleCard"/>
+                </methods>
+            </class>
+            <class name="DeleteCard">
+                <methods>
+                    <include name="DeleteVehicleCard"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="BulkCards">
+        <classes>
+            <class name="CreateBulkOfCards">
+                <methods>
+                    <include name="CreateBulkVehicleCard"/>
+                </methods>
+            </class>
+            <class name="UploadBulkOfCards"/>
+        </classes>
+    </test>
+    <test name="TopUpVehicleStock">
+        <classes>
+            <class name="TopUpCardStock">
+                <methods>
+                    <include name="TopupVehicleStock"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,80 +1,67 @@
 
 import Pages.AdCampaignPage;
-import Pages.LoginPage;
-import Pages.OrganizationsPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import javax.swing.plaf.basic.BasicSliderUI;
-import java.awt.*;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static java.awt.SystemColor.window;
 
-public class CreateAdCampaign {
+public class CreateAdCampaign extends BeforeAndAfter{
 
-    BeforeAndAfter dashAdmin;
+    //public static BeforeAndAfter dashAdmin;
 
-    @BeforeMethod
+    @BeforeTest
     public void OpenCampaign(){
-        dashAdmin= new BeforeAndAfter();
-        dashAdmin.OpenDashboard();
+        //dashAdmin= new BeforeAndAfter();
+       OpenDashboard();
         ///////Scroll the menu sidebar//////////////////////
 
-        WebElement CampaignMenu = dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[19]/div[1]/span[1]"));
-        JavascriptExecutor je = (JavascriptExecutor) dashAdmin.driver;
+        WebElement CampaignMenu = driver.findElement(By.xpath("//body[1]/div[1]/section[1]/aside[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[20]/div[1]"));
+        JavascriptExecutor je = (JavascriptExecutor) driver;
         je.executeScript("arguments[0].scrollIntoView(true);",CampaignMenu);
-        CampaignMenu.click();
+        je.executeScript("arguments[0].click()", CampaignMenu);
         //////////////////////////////////////
 
-        AdCampaignPage.AdCampaignLink(dashAdmin.driver).click();
+        AdCampaignPage.AdCampaignLink(driver).click();
 
     }
-    @Test(priority = 0)
-    public void CreateAdCampaign() throws InterruptedException
+    @Test
+    public void CreateCampaign() throws InterruptedException
     {
-        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
-        jes.executeScript("arguments[0].scrollIntoView(true);",AdCampaignPage.CreateNewCampaign(dashAdmin.driver));
-        jes.executeScript("arguments[0].click()",AdCampaignPage.CreateNewCampaign(dashAdmin.driver));
-        AdCampaignPage.CampaignStatus(dashAdmin.driver).click();
-        AdCampaignPage.CampaignName(dashAdmin.driver).sendKeys("AutoCampaign");
-        AdCampaignPage.OrgCampaign(dashAdmin.driver).sendKeys("Automation Org");
         Thread.sleep(1000);
-        AdCampaignPage.OrgCampaign(dashAdmin.driver).sendKeys(Keys.ENTER);
+        AdCampaignPage.CreateNewCampaign(driver).click();
+        AdCampaignPage.CampaignStatus(driver).click();
+        AdCampaignPage.CampaignName(driver).sendKeys(campaignName);
+        AdCampaignPage.OrgCampaign(driver).sendKeys(campaignOrg);
+        Thread.sleep(1000);
+        WebElement org1 = driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+campaignOrg+"')]"));
+        org1.click();
         /////// Valid until/////////
-        String fromDay = "29";
-        String toDay= "31";
-        AdCampaignPage.ValidForm(dashAdmin.driver).click();
-        List<WebElement> allDatesFrom= dashAdmin.driver.findElements(By.xpath("//body[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/table[1]//td"));
+        AdCampaignPage.ValidForm(driver).click();
+        List<WebElement> allDatesFrom= driver.findElements(By.xpath(xpathMonthFualBack));
         for(WebElement ele:allDatesFrom){
             String dt1= ele.getText();
-            if (dt1.equals(fromDay))  ele.click();
+            if (dt1.equals(campaignValidUntilFrom))  ele.click();
         }
         for(WebElement ele1:allDatesFrom){
             String dt2= ele1.getText();
-            if (dt2.equals(toDay))  ele1.click();
+            if (dt2.equals(campaignValidUntilTo))  ele1.click();
         }
         //////////////////////////////
-        AdCampaignPage.CampaignSave(dashAdmin.driver).click();
-        AdCampaignPage.CampaignConfirmationMessage(dashAdmin.driver).getText();
-        String actual  = AdCampaignPage.CampaignConfirmationMessage(dashAdmin.driver).getText();
+        AdCampaignPage.CampaignSave(driver).click();
+        AdCampaignPage.CampaignConfirmationMessage(driver).getText();
+        String actual  = AdCampaignPage.CampaignConfirmationMessage(driver).getText();
         System.out.println(actual);
-        String expected = "Ad Campaign created successfully.";
+        String expected = "New Campaign created successfully";
         Assert.assertEquals(actual, expected);
+
     }
 
 
 
-    @AfterMethod
+    @AfterTest
     public void CloseBrowser(){
-        dashAdmin.CloseDashboard();
+        CloseDashboard();
     }
 }

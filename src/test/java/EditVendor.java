@@ -1,5 +1,6 @@
 import Pages.VendorsPage;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -24,17 +25,16 @@ public class EditVendor {
     public void EditNormalVendor() throws InterruptedException
     {
         // Click on edit icon for special normal vendor
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoNormalOrg']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.vendorName +"']//parent::tr//td[12]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Vendor')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        VendorsPage.SelectVenue(dashAdmin.driver).clear();
-        VendorsPage.SelectVenue(dashAdmin.driver).sendKeys("map-another");
-        Thread.sleep(2000);
-        VendorsPage.SelectVenue(dashAdmin.driver).sendKeys(Keys.ENTER);
-        VendorsPage.VendorName(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
-        VendorsPage.VendorName(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VendorsPage.VendorName(dashAdmin.driver).sendKeys("vendorMap");
+        VendorsPage.VendorName(dashAdmin.driver).sendKeys(dashAdmin.vendorNameEdit);
+        VendorsPage.VendorPaymentMethod(dashAdmin.driver).click();
+        dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and normalize-space()='Nearpay (SPOS)']")).click();
         VendorsPage.VendorSave(dashAdmin.driver).click();
         VendorsPage.VendorEditconfirmationmessage(dashAdmin.driver).getText();
         String actual  = VendorsPage.VendorEditconfirmationmessage(dashAdmin.driver).getText();
@@ -46,38 +46,27 @@ public class EditVendor {
     @Test(priority = 1)
     public void EditFuelBackVendor() throws InterruptedException
     {
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='MapFuel']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.vendorNameFuelBack +"']//parent::tr//td[12]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Vendor')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        VendorsPage.SelectVenue(dashAdmin.driver).sendKeys("map-another");
-        Thread.sleep(2000);
-        VendorsPage.SelectVenue(dashAdmin.driver).sendKeys(Keys.ENTER);
+        VendorsPage.SelectVenue(dashAdmin.driver).sendKeys(dashAdmin.venueOfVendorEdit);
+        Thread.sleep(1000);
+        WebElement venue = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and starts-with(.,'"+dashAdmin.venueOfVendorEdit+"')]"));
+        venue.click();
         VendorsPage.VendorName(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         VendorsPage.VendorName(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VendorsPage.VendorName(dashAdmin.driver).sendKeys("FuelMap");
+        VendorsPage.VendorName(dashAdmin.driver).sendKeys(dashAdmin.vendorNameFuelBackEdit);
         VendorsPage.FuelBackLimitperVendor(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         VendorsPage.FuelBackLimitperVendor(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VendorsPage.FuelBackLimitperVendor(dashAdmin.driver).sendKeys("600");
+        VendorsPage.FuelBackLimitperVendor(dashAdmin.driver).sendKeys(dashAdmin.vendorFuelBackLimitEdit);
         VendorsPage.FuelBackPercentageforEndUser(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         VendorsPage.FuelBackPercentageforEndUser(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VendorsPage.FuelBackPercentageforEndUser(dashAdmin.driver).sendKeys("1.5");
-        /////// Valid until/////////
-        String fromDay = "25";
-        String toDay= "27";
-        VendorsPage.VendorValidUntilFrom(dashAdmin.driver).click();
-        List<WebElement> allDatesFrom= dashAdmin.driver.findElements(By.xpath("//body/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/table[1]//td"));
-        for(WebElement ele:allDatesFrom){
-            String dt1= ele.getText();
-            if (dt1.equals(fromDay))  ele.click();
-        }
-        for(WebElement ele1:allDatesFrom){
-            String dt2= ele1.getText();
-            if (dt2.equals(toDay))  ele1.click();
-        }
-        //////////////////////////////
-        Thread.sleep(1000);
-        VendorsPage.VendorSaveFuelBack(dashAdmin.driver).click();
+        VendorsPage.FuelBackPercentageforEndUser(dashAdmin.driver).sendKeys(dashAdmin.vendorFuelBackPercentageForUserEdit);
+        VendorsPage.VendorSave(dashAdmin.driver).click();
         VendorsPage.VendorEditconfirmationmessage(dashAdmin.driver).getText();
         String actual  = VendorsPage.VendorEditconfirmationmessage(dashAdmin.driver).getText();
         System.out.println(actual);

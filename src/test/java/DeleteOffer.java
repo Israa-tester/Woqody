@@ -4,6 +4,7 @@ import Pages.OffersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -23,7 +24,7 @@ public class DeleteOffer {
         dashAdmin.OpenDashboard();
         ///////Scroll the menu sidebar//////////////////////
 
-        WebElement offerMenu = dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[18]/div[1]/span[1]"));
+        WebElement offerMenu = dashAdmin.driver.findElement(By.xpath("//body[1]/div[1]/section[1]/aside[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[19]/div[1]"));
         JavascriptExecutor je = (JavascriptExecutor) dashAdmin.driver;
         je.executeScript("arguments[0].scrollIntoView(true);",offerMenu);
         je.executeScript("arguments[0].click()", offerMenu);
@@ -34,9 +35,12 @@ public class DeleteOffer {
     @Test(priority = 0)
     public void DeleteNormalOffer() throws InterruptedException {
         // Click on Delete icon for special normal offer
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoNormal Edit']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteNormalOffer +"']//parent::tr//td[10]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         Thread.sleep(1000);
         OffersPage.DeleteButton(dashAdmin.driver).click();
@@ -50,9 +54,12 @@ public class DeleteOffer {
     @Test(priority = 1)
     public void DeleteWatchWinOffer() throws InterruptedException {
         // Click on Delete icon for special watchWin offer
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoWatchWin Edit']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.offerWatchTitleEdit +"']//parent::tr//td[10]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         Thread.sleep(1000);
         OffersPage.DeleteButton(dashAdmin.driver).click();
@@ -67,9 +74,12 @@ public class DeleteOffer {
     public void DeleteClickWinOffer() throws InterruptedException {
 
         // Click on Delete icon for special ClickWin offer
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoClickWin Edit']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.offerClickTitle +"']//parent::tr//td[10]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         Thread.sleep(1000);
         OffersPage.DeleteButton(dashAdmin.driver).click();
@@ -83,9 +93,12 @@ public class DeleteOffer {
     public void CreateDownloadWinOffer() throws InterruptedException {
 
         // Click on Delete icon for special DownloadWin offer
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoDownloadWinEdit']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteDownloadOffer +"']//parent::tr//td[10]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         Thread.sleep(1000);
         OffersPage.DeleteButton(dashAdmin.driver).click();

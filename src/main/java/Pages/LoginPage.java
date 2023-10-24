@@ -8,13 +8,13 @@ import org.openqa.selenium.WebElement;
 public class LoginPage {
      private static WebElement element = null;
     //------------------------------------------------------------------------------------------------
-    public static WebElement  loginusername (WebDriver driver )
+    public static WebElement loginusername (WebDriver driver )
     {
         element = driver.findElement(By.xpath("//input[@placeholder='E-mail']"));
         return element;
     }
 
-    public static WebElement  loginpassword(WebDriver driver )
+    public static WebElement loginpassword (WebDriver driver )
     {
         element = driver.findElement(By.xpath("//input[@placeholder='Password']"));
         return element;

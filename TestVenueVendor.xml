@@ -1,0 +1,101 @@
+<suite name="OrgSuite">
+    <listeners>
+        <listener class-name="Listener"></listener>
+    </listeners>
+  <!---<test name="NormalVenue">
+       <classes>
+         <class name="CreateVenue">
+             <methods>
+                 <include name="CreateNormalVenue"/>
+             </methods>
+         </class>
+           <class name="EditVenue">
+               <methods>
+                   <include name="EditNormalVenue"/>
+               </methods>
+           </class>
+           <class name="DeleteVenue">
+               <methods>
+                   <include name="DeleteNormalVenue"/>
+               </methods>
+           </class>
+       </classes>
+    </test>
+
+    <test name="DeliveryVenue">
+        <classes>
+            <class name="CreateVenue">
+                <methods>
+                    <include name="CreateDeliveryVenue"/>
+                </methods>
+            </class>
+            <class name="EditVenue">
+                <methods>
+                    <include name="EditDeliveryVenue"/>
+                </methods>
+            </class>
+            <class name="DeleteVenue">
+                <methods>
+                    <include name="DeleteDeliveryVenue"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="FuelBackVenue">
+        <classes>
+            <class name="CreateVenue">
+                <methods>
+                    <include name="CreateFuelBackVenue"/>
+                </methods>
+            </class>
+            <class name="EditVenue">
+                <methods>
+                    <include name="EditFuelBackVenue"/>
+                </methods>
+            </class>
+            <class name="DeleteVenue">
+                <methods>
+                    <include name="DeleteFuelBackVenue"/>
+                </methods>
+            </class>
+        </classes>
+    </test> -->
+    <test name="NormalVendor">
+        <classes>
+            <class name="CreateVendor">
+                <methods>
+                    <include name="CreateNormalVendor"/>
+                </methods>
+            </class>
+            <class name="EditVendor">
+                <methods>
+                    <include name="EditNormalVendor"/>
+                </methods>
+            </class>
+            <class name="DeleteVendor">
+                <methods>
+                    <include name="DeleteNormalVendor"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="FuelBackVendor">
+        <classes>
+            <class name="CreateVendor">
+                <methods>
+                    <include name="CreateFuelBackVendor"/>
+                </methods>
+            </class>
+            <class name="EditVendor">
+                <methods>
+                    <include name="EditFuelBackVendor"/>
+                </methods>
+            </class>
+            <class name="DeleteVendor">
+                <methods>
+                    <include name="DeleteFuelBackVendor"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

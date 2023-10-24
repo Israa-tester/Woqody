@@ -11,56 +11,63 @@ public class VenuesPage
 	public static WebElement  Venueslink (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[3]/span[1]/a[1]"));
+		element = driver.findElement(By.xpath("//li[@title='Venues']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  NewVenueslink (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//span[contains(text(),'Add New Venue')]"));
+		element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-primary']"));
 		return element;		
+	}
+	//-----------------------------------------------------------------------------------------
+	public static WebElement  VenueStatus (WebDriver driver )
+
+	{
+		element = driver.findElement(By.xpath("//span[@class='ant-switch-inner']"));
+		return element;
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  SelectOrg (WebDriver driver ) 
 
 		{
-			element = driver.findElement(By.xpath("//body/div/div[@class='ant-drawer ant-drawer-right ant-drawer-open drawer-btn-component']/div[@class='ant-drawer-content-wrapper']/div[@class='ant-drawer-content']/div[@class='ant-drawer-wrapper-body']/div[@class='ant-drawer-body']/form[@class='ant-legacy-form ant-legacy-form-horizontal']/div[@class='ant-row ant-legacy-form-item']/div[@class='ant-col ant-legacy-form-item-control-wrapper']/div[@class='ant-legacy-form-item-control']/span[@class='ant-legacy-form-item-children']/div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']/div[@class='ant-select-selector']/span[@class='ant-select-selection-search']/input[1]"));
+			element = driver.findElement(By.xpath("(//input[@role='combobox'])[3]"));
 			return element;		
 		}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  VenueType (WebDriver driver ) 
 
 		{
-			element = driver.findElement(By.xpath("//input[@id='venues_form_venue_type']"));
+			element = driver.findElement(By.xpath("//input[@aria-owns='venues_form_venue_type_list']"));
 			return element;		
 		}	
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  VenueName (WebDriver driver ) 
 
 		{
-			element = driver.findElement(By.xpath("//input[@id='venues_form_name']"));
+			element = driver.findElement(By.id("venues_form_name"));
 			return element;		
 		}	
 	//-----------------------------------------------------------------------------------------
 		public static WebElement  VenueCity (WebDriver driver ) 
 
 			{
-				element = driver.findElement(By.xpath("//input[@id='venues_form_city']"));
+				element = driver.findElement(By.xpath("(//input[@role='combobox'])[5]"));
 				return element;		
 			}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  NumberWorkingShifts (WebDriver driver )
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='venues_form_numberOfWorkingPeriods']"));
+		element = driver.findElement(By.id("venues_form_numberOfWorkingPeriods"));
 		return element;
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  WorkFrom (WebDriver driver )
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='venues_form_workingHours1']"));
+		element = driver.findElement(By.xpath("//input[@placeholder='From']"));
 		return element;
 	}
 	//-----------------------------------------------------------------------------------------
@@ -71,10 +78,10 @@ public class VenuesPage
 		return element;
 	}
 	//-----------------------------------------------------------------------------------------
-		public static WebElement  VenueLocation (WebDriver driver ) 
+		public static WebElement  VenueLocation (WebDriver driver )
 
 			{
-				element = driver.findElement(By.xpath("//input[@id='searchBox']"));
+				element = driver.findElement(By.id("searchBox"));
 				return element;		
 			}
 		//-----------------------------------------------------------------------------------------
@@ -114,7 +121,7 @@ public class VenuesPage
 			return element;		
 		}
 		//-----------------------------------------------------------------------------------------
-		public static WebElement  ManufaturedYear (WebDriver driver ) 
+		public static WebElement  ManufacturedYear (WebDriver driver )
 
 		{
 			element = driver.findElement(By.xpath("//input[@id='venues_form_manufacturedYear']"));
@@ -166,7 +173,7 @@ public class VenuesPage
 		public static WebElement  TankProduct (WebDriver driver ) 
 
 		{
-			element = driver.findElement(By.xpath("//input[@id='venues_form_productId1']"));
+			element = driver.findElement(By.xpath("(//input[@role='combobox'])[6]"));
 			return element;		
 		}
 		//-----------------------------------------------------------------------------------------
@@ -181,7 +188,7 @@ public class VenuesPage
 	//------------------------------------------------------------------------------------------
 
 	public static WebElement DeleteButton(WebDriver driver) {
-		element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+		element = driver.findElement(By.xpath("//button[contains(@class,'ant-btn ant-btn-default ant-btn-dangerous')]"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------

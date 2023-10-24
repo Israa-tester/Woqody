@@ -19,13 +19,13 @@ public class OffersPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement OfferTitle(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@data-__meta='[object Object]']"));
+        element = driver.findElement(By.id("offers_form_title"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement OfferType(WebDriver driver) {
-        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-show-arrow']"));
+        element = driver.findElement(By.xpath("//div[contains(@class,'ant-select ant-select-single ant-select-show-arrow')]//div[contains(@class,'ant-select-selector')]"));
         return element;
     }
 
@@ -43,13 +43,13 @@ public class OffersPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement OfferNormalVenue(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/span[1]/div[1]/div[1]"));
+        element = driver.findElement(By.xpath("//body/div/div[@class='ant-modal-root']/div[@role='dialog']/div[@role='document']/div[@class='ant-modal-content']/div[@class='ant-modal-body']/form[@class='ant-legacy-form ant-legacy-form-horizontal']/div[@class='flex row']/div[@class='flex column']/div[@class='flex row']/div[3]/div[2]/div[1]/span[1]/div[1]"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement OfferWinVenue(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[1]/div[3]/div[3]/div[2]/div[1]/span[1]/div[1]/div[1]"));
+        element = driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[2]/form[1]/div[2]/div[1]/div[3]/div[3]/div[2]/div[1]/span[1]/div[1]/div[1]"));
         return element;
     }
 
@@ -73,7 +73,7 @@ public class OffersPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement OfferVideo(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/span[1]/div[1]/span[1]/input[1]"));
+        element = driver.findElement(By.xpath("//span[contains(@role,'button')]//input[contains(@type,'file')]"));
         return element;
     }
 
@@ -91,31 +91,16 @@ public class OffersPage {
     }
     //-----------------------------------------------------------------------------------------
     public static WebElement OfferEditMessage(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'AutoNormal Edit updated successfully')]"));
+        element = driver.findElement(By.xpath("//span[contains(text(),'updated successfully')]"));
         return element;
     }
-    //-----------------------------------------------------------------------------------------
-    public static WebElement OfferEditMessageWatch(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'AutoWatchWin updated successfully')]"));
-        return element;
-    }
-    //-----------------------------------------------------------------------------------------
-    public static WebElement OfferEditMessageClick(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'AutoClickWin Edit updated successfully')]"));
-        return element;
-    }
-    //-----------------------------------------------------------------------------------------
-    public static WebElement OfferEditMessageDownload(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'AutoDownloadWinEdit updated successfully')]"));
-        return element;
-    }
-    //-----------------------------------------------------------------------------------------
+
     //-----------------------------------------------------------------------------------------
     //////////////////////////Delete Offer//////////////////////////////////////
     //------------------------------------------------------------------------------------------
 
     public static WebElement DeleteButton(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+        element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-dangerous']"));
         return element;
     }
     //------------------------------------------------------------------------------------------

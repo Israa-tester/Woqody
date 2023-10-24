@@ -2,8 +2,10 @@ import Pages.OrganizationsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,32 +22,40 @@ public class ViewOrg {
     }
 
     @Test(priority = 0)
-    public void ViewNormalOrg(){
+    public void ViewNormalOrg() {
 
         // Click on view icon for special normal organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='test3']//parent::tr//button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteNormalOrg +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'View Organization')]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
+        //SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertAll();
+        Assert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
         OrganizationsPage.TransactionTab(dashAdmin.driver).click();
-        softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[2]")).getAttribute("class").contains("active"));
+        Assert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[2]")).getAttribute("class").contains("active"));
         OrganizationsPage.StuffMembersTab(dashAdmin.driver).click();
-        softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[3]")).getAttribute("class").contains("active"));
+        Assert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[3]")).getAttribute("class").contains("active"));
         OrganizationsPage.POSDevicesTab(dashAdmin.driver).click();
-        softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[4]")).getAttribute("class").contains("active"));
+        Assert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[4]")).getAttribute("class").contains("active"));
         OrganizationsPage.InformationTab(dashAdmin.driver).click();
-        softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
+        Assert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
 
     }
 
     @Test(priority = 1)
     public void ViewEnterpriseOrg() {
         // Click on view icon for special enterprise organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='test']//parent::tr//button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteEnterpriseOrg +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'View Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
+        /////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
@@ -61,15 +71,19 @@ public class ViewOrg {
         softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[6]")).getAttribute("class").contains("active"));
         OrganizationsPage.InformationTab(dashAdmin.driver).click();
         softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
+        softAssert.assertAll();
     }
 
     @Test(priority = 2)
     public void ViewFuelBackOrg(){
 
         // Click on view icon for special fuel back organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='Eman Helmy']//parent::tr//button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.deleteFuelBackOrg +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'View Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
@@ -81,6 +95,7 @@ public class ViewOrg {
         softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[4]")).getAttribute("class").contains("active"));
         OrganizationsPage.InformationTab(dashAdmin.driver).click();
         softAssert.assertTrue(dashAdmin.driver.findElement(By.xpath("//div[@class='ant-tabs-nav-list']/div[1]")).getAttribute("class").contains("active"));
+        softAssert.assertAll();
     }
 
     @AfterMethod

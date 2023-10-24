@@ -9,11 +9,11 @@ public class AdPage {
 
     //------------------------------------------------------------------------------------------
     public static WebElement AdLink(WebDriver driver) {
-        element = driver.findElement(By.xpath("//a[@href='/ads']"));
+        element = driver.findElement(By.xpath("//li[contains(@title,'Ads')]//a[contains(@class,'layout__link')]"));
         return element;
     }
     public static WebElement CreateNewAd(WebDriver driver) {
-        element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-primary']"));
+        element = driver.findElement(By.xpath("//button[contains(@class,'ant-btn ant-btn-primary')]"));
         return element;
     }
 
@@ -25,13 +25,13 @@ public class AdPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement AdTitle(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@data-__meta='[object Object]']"));
+        element = driver.findElement(By.xpath("//input[contains(@data-__meta,'[object Object]')]"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement AdPlacement(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@aria-owns='ads_form_placement_list']"));
+        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-show-arrow']//div[@class='ant-select-selector']"));
         return element;
     }
 
@@ -67,7 +67,7 @@ public class AdPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement AdEditMessage(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'undefined updated successfully')]"));
+        element = driver.findElement(By.xpath("//span[contains(text(),'updated successfully')]"));
         return element;
     }
 
@@ -76,7 +76,7 @@ public class AdPage {
     //------------------------------------------------------------------------------------------
 
     public static WebElement DeleteButton(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+        element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-dangerous']"));
         return element;
     }
     //------------------------------------------------------------------------------------------

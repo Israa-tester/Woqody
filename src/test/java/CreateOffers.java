@@ -2,6 +2,7 @@
 import Pages.OffersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -19,7 +20,7 @@ public class CreateOffers {
         dashAdmin.OpenDashboard();
         ///////Scroll the menu sidebar//////////////////////
 
-        WebElement offerMenu = dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[18]/div[1]/span[1]"));
+        WebElement offerMenu = dashAdmin.driver.findElement(By.xpath("//body[1]/div[1]/section[1]/aside[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[19]/div[1]"));
         JavascriptExecutor je = (JavascriptExecutor) dashAdmin.driver;
         je.executeScript("arguments[0].scrollIntoView(true);",offerMenu);
         je.executeScript("arguments[0].click()", offerMenu);
@@ -30,19 +31,20 @@ public class CreateOffers {
     }
 
     @Test(priority = 0)
-    public void CreateNormalOffer() {
-        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
-        OffersPage.OfferTitle(dashAdmin.driver).sendKeys("AutoNormal");
+    public void CreateNormalOffer() throws InterruptedException {
+
+        OffersPage.OfferTitle(dashAdmin.driver).sendKeys(dashAdmin.offerNormalTitle);
         OffersPage.offerCategory(dashAdmin.driver).click();
-        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Bsnk')]"));
-        jes.executeScript("arguments[0].click()", cat);
+        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerCat+"')]"));
+        cat.click();
         OffersPage.OfferOrg(dashAdmin.driver).click();
-        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Solar Normal')]"));
-        jes.executeScript("arguments[0].click()", org);
+        Thread.sleep(1000);
+        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerOrg+"')]"));
+        org.click();
         OffersPage.OfferNormalVenue(dashAdmin.driver).click();
-        WebElement ven= dashAdmin.driver.findElement(By.xpath("//span[normalize-space()='Solar delivery']"));
-        jes.executeScript("arguments[0].click()", ven);
-        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys("Description Normal Offer");
+        WebElement ven= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content')]//span[normalize-space()='"+dashAdmin.offerVenue+"']"));
+        ven.click();
+        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys(dashAdmin.offerDescription);
         OffersPage.OfferSave(dashAdmin.driver).click();
         OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
         String actual  = OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
@@ -52,24 +54,25 @@ public class CreateOffers {
 
     }
     @Test(priority = 1)
-    public void CreateWatchWinOffer() {
-        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
-        OffersPage.OfferTitle(dashAdmin.driver).sendKeys("AutoWatchWin");
+    public void CreateWatchWinOffer() throws InterruptedException {
+
+        OffersPage.OfferTitle(dashAdmin.driver).sendKeys(dashAdmin.offerWatchTitle);
         OffersPage.OfferType(dashAdmin.driver).click();
-        WebElement watch = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Watch & Win')]"));
-        jes.executeScript("arguments[0].click()", watch);
-        OffersPage.OfferCashBackAmount(dashAdmin.driver).sendKeys("10");
+        WebElement watch= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'Watch & Win')]"));
+        watch.click();
+        OffersPage.OfferCashBackAmount(dashAdmin.driver).sendKeys(dashAdmin.offerCashBackAmount);
         OffersPage.offerCategory(dashAdmin.driver).click();
-        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Bsnk')]"));
-        jes.executeScript("arguments[0].click()", cat);
+        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerCat+"')]"));
+        cat.click();
         OffersPage.OfferOrg(dashAdmin.driver).click();
-        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Solar Normal')]"));
-        jes.executeScript("arguments[0].click()", org);
+        Thread.sleep(1000);
+        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerOrg+"')]"));
+        org.click();
         OffersPage.OfferWinVenue(dashAdmin.driver).click();
-        WebElement ven= dashAdmin.driver.findElement(By.xpath("//span[normalize-space()='Solar delivery']"));
-        jes.executeScript("arguments[0].click()", ven);
-        OffersPage.OfferVideo(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\rabbit.mp4");
-        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys("Description Normal Offer");
+        WebElement ven= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content')]//span[normalize-space()='"+dashAdmin.offerVenue+"']"));
+        ven.click();
+        OffersPage.OfferVideo(dashAdmin.driver).sendKeys(dashAdmin.fileWatchOffer);
+        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys(dashAdmin.offerDescription);
         OffersPage.OfferSave(dashAdmin.driver).click();
         OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
         String actual  = OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
@@ -77,27 +80,28 @@ public class CreateOffers {
         String expected = "New offer created successfully";
         Assert.assertEquals(actual, expected);
 
+
     }
     @Test(priority = 2)
-    public void CreateClickWinOffer() {
+    public void CreateClickWinOffer() throws InterruptedException {
 
-        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
-        OffersPage.OfferTitle(dashAdmin.driver).sendKeys("AutoClickWin");
+        OffersPage.OfferTitle(dashAdmin.driver).sendKeys(dashAdmin.offerClickTitle);
         OffersPage.OfferType(dashAdmin.driver).click();
-        WebElement click = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Click & Win')]"));
-        jes.executeScript("arguments[0].click()", click);
-        OffersPage.OfferCashBackAmount(dashAdmin.driver).sendKeys("10");
+        WebElement click= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'Click & Win')]"));
+        click.click();
+        OffersPage.OfferCashBackAmount(dashAdmin.driver).sendKeys(dashAdmin.offerCashBackAmount);
         OffersPage.offerCategory(dashAdmin.driver).click();
-        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Bsnk')]"));
-        jes.executeScript("arguments[0].click()", cat);
+        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerCat+"')]"));
+        cat.click();
         OffersPage.OfferOrg(dashAdmin.driver).click();
-        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Solar Normal')]"));
-        jes.executeScript("arguments[0].click()", org);
+        Thread.sleep(1000);
+        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerOrg+"')]"));
+        org.click();
         OffersPage.OfferWinVenue(dashAdmin.driver).click();
-        WebElement ven= dashAdmin.driver.findElement(By.xpath("//span[normalize-space()='Solar delivery']"));
-        jes.executeScript("arguments[0].click()", ven);
-        OffersPage.OffercaptionLink(dashAdmin.driver).sendKeys("https://www.google.com/");
-        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys("Description Normal Offer");
+        WebElement ven= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content')]//span[normalize-space()='"+dashAdmin.offerVenue+"']"));
+        ven.click();
+        OffersPage.OffercaptionLink(dashAdmin.driver).sendKeys(dashAdmin.actionLinkClick);
+        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys(dashAdmin.offerDescription);
         OffersPage.OfferSave(dashAdmin.driver).click();
         OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
         String actual  = OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
@@ -106,25 +110,25 @@ public class CreateOffers {
         Assert.assertEquals(actual, expected);
     }
     @Test(priority = 3)
-    public void CreateDownloadWinOffer(){
+    public void CreateDownloadWinOffer() throws InterruptedException {
 
-        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
-        OffersPage.OfferTitle(dashAdmin.driver).sendKeys("AutoDownloadWin");
+        OffersPage.OfferTitle(dashAdmin.driver).sendKeys(dashAdmin.offerDownloadTitle);
         OffersPage.OfferType(dashAdmin.driver).click();
-        WebElement click = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Download & Win')]"));
-        jes.executeScript("arguments[0].click()", click);
-        OffersPage.OfferCashBackAmount(dashAdmin.driver).sendKeys("16");
+        WebElement click= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'Download & Win')]"));
+        click.click();
+        OffersPage.OfferCashBackAmount(dashAdmin.driver).sendKeys(dashAdmin.offerCashBackAmount);
         OffersPage.offerCategory(dashAdmin.driver).click();
-        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Bsnk')]"));
-        jes.executeScript("arguments[0].click()", cat);
+        WebElement cat= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerCat+"')]"));
+        cat.click();
         OffersPage.OfferOrg(dashAdmin.driver).click();
-        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(text(),'Solar Normal')]"));
-        jes.executeScript("arguments[0].click()", org);
+        Thread.sleep(1000);
+        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.offerOrg+"')]"));
+        org.click();
         OffersPage.OfferWinVenue(dashAdmin.driver).click();
-        WebElement ven= dashAdmin.driver.findElement(By.xpath("//span[normalize-space()='Solar delivery']"));
-        jes.executeScript("arguments[0].click()", ven);
-        OffersPage.OffercaptionLink(dashAdmin.driver).sendKeys("https://www.google.com/");
-        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys("Description Normal Offer");
+        WebElement ven= dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content')]//span[normalize-space()='"+dashAdmin.offerVenue+"']"));
+        ven.click();
+        OffersPage.OffercaptionLink(dashAdmin.driver).sendKeys(dashAdmin.actionLinkDownload);
+        OffersPage.OfferDescripe(dashAdmin.driver).sendKeys(dashAdmin.offerDescription);
         OffersPage.OfferSave(dashAdmin.driver).click();
         OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();
         String actual  = OffersPage.OfferConfirmationMessage(dashAdmin.driver).getText();

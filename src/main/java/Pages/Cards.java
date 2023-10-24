@@ -10,32 +10,32 @@ public class Cards {
     //------------------------------------------------------------------------------------------
     //------------------Single Card Form-------------------------
     public static WebElement Cardslink(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body[1]/div[1]/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[6]/ul[1]/li[1]/span[1]/a[1]"));
+        element = driver.findElement(By.xpath("//a[@href='/cards']"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     /////////////Single Card/////////////////
     public static WebElement CreateSingleCard(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[5]/button[1]"));
+        element = driver.findElement(By.xpath("//body[1]/div[1]/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[5]/button[1]"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardType(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_type']"));
+        element = driver.findElement(By.xpath("(//div[@class='ant-select-selector'])[2]"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardAmount(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_amount']"));
+        element = driver.findElement(By.id("cards_form_amount"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardStock(WebDriver driver) {
-        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
+        element = driver.findElement(By.xpath("//div[contains(@class,'ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search')]//input[contains(@role,'combobox')]"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
@@ -52,13 +52,13 @@ public class Cards {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardUser(WebDriver driver) {
-        element = driver.findElement(By.xpath("//div[@class='ant-legacy-form-item-control']//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
+        element = driver.findElement(By.xpath("//div[@class='ant-legacy-form-item-control']//input[@role='combobox']"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardEnableOverDraft(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[8]/div[1]/div[2]/div[1]/span[1]/button[1]"));
+        element = driver.findElement(By.id("cards_form_isOverdraftEnabled"));
         return element;
     }
 
@@ -118,7 +118,12 @@ public class Cards {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardCeilingTopup(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'Ceiling Top-Up Amount')]]"));
+        element = driver.findElement(By.xpath("//div[contains(@class,'ant-modal-root')]//label[2]//span[2]"));
+        return element;
+    }
+    //-----------------------------------------------------------------------------------------
+    public static WebElement CardFixedTopup(WebDriver driver) {
+        element = driver.findElement(By.xpath("//label[@class='ant-radio-button-wrapper']"));
         return element;
     }
 
@@ -130,7 +135,7 @@ public class Cards {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CardtopupPeriod(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@id='cards_form_cardsSchedulerType']"));
+        element = driver.findElement(By.xpath("//input[@aria-owns='cards_form_cardsSchedulerType_list']"));
         return element;
     }
 
@@ -190,7 +195,7 @@ public class Cards {
     //------------------------------------------------------------------------------------------
     //------------------Bulk of Card Form-------------------------
      public static WebElement BulkOfCardsLink(WebDriver driver) {
-         element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[3]/button[1]"));
+         element = driver.findElement(By.xpath("//div[contains(@class,'ant-page-header page__header ant-page-header-ghost')]//div[3]//button[1]"));
          return element;
      }
     //------------------------------------------------------------------------------------------
@@ -200,7 +205,7 @@ public class Cards {
     }
     //------------------------------------------------------------------------------------------
     public static WebElement BulkEmployees(WebDriver driver) {
-        element = driver.findElement(By.xpath("//div[@class='ant-table-selection']//span[@class='ant-checkbox']"));
+        element = driver.findElement(By.xpath("//div[contains(@class,'ant-table-selection')]//input[contains(@type,'checkbox')]"));
         return element;
     }
     //------------------------------------------------------------------------------------------
@@ -212,7 +217,7 @@ public class Cards {
     //-----------------------Upload Bulk Of Cards-----------------------------------
 
     public static WebElement UploadBulkLink(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'Upload Bulk Of Cards')]"));
+        element = driver.findElement(By.xpath("//div[contains(@class,'ant-space ant-space-horizontal ant-space-align-center')]//div[1]//button[1]"));
         return element;
     }
     //------------------------------------------------------------------------------------------
@@ -222,7 +227,7 @@ public class Cards {
     }
     //------------------------------------------------------------------------------------------
     public static WebElement BulkUploadFile(WebDriver driver) {
-        element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[5]/span[1]/div[1]/span[1]/input[1]"));
+        element = driver.findElement(By.xpath("//input[@type='file']"));
         return element;
     }
     //------------------------------------------------------------------------------------------

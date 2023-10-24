@@ -9,7 +9,7 @@ public class AdCampaignPage {
 
     //------------------------------------------------------------------------------------------
     public static WebElement AdCampaignLink(WebDriver driver) {
-        element = driver.findElement(By.xpath("//a[@href='/ads-campaigns']"));
+        element = driver.findElement(By.xpath("//li[contains(@title,'Campaigns')]"));
         return element;
     }
     public static WebElement CreateNewCampaign(WebDriver driver) {
@@ -49,13 +49,13 @@ public class AdCampaignPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CampaignConfirmationMessage(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'Ad Campaign created successfully.')]"));
+        element = driver.findElement(By.xpath("//span[contains(text(),'New Campaign created successfully')]"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement CampaignEditMessage(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'AddQC33 updated successfully')]"));
+        element = driver.findElement(By.xpath("//span[contains(text(),'updated successfully')]"));
         return element;
     }
 
@@ -69,7 +69,7 @@ public class AdCampaignPage {
     //------------------------------------------------------------------------------------------
 
     public static WebElement DeleteButton(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+        element = driver.findElement(By.xpath("//button[contains(@class,'ant-btn ant-btn-default ant-btn-dangerous')]"));
         return element;
     }
     //------------------------------------------------------------------------------------------

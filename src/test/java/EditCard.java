@@ -1,5 +1,6 @@
 import Pages.Cards;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,34 +17,38 @@ public class EditCard {
     public void OpenCardPage(){
         dashAdmin= new BeforeAndAfter();
         dashAdmin.OpenDashboard();
-        dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[6]/div[1]/span[1]")).click();
+        dashAdmin.driver.findElement(By.xpath("//span[contains(text(),'Cards')]")).click();
         Cards.Cardslink(dashAdmin.driver).click();
+
 
     }
     @Test(priority = 0)
-    public void EditVehicleCard() throws InterruptedException
+    public void EditVehicleCard()
     {
         // Click on edit icon for special Vehicle card
         WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoLabel - 345 - 1 - 6']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[starts-with(.,'"+dashAdmin.cardLabelV+"')]//parent::tr//td[13]//span")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementView = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Edit Card')]")));
+        action.moveToElement(element1).moveToElement(elementView).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         Cards.CardLabel(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         Cards.CardLabel(dashAdmin.driver).sendKeys(Keys.DELETE);
-        Cards.CardLabel(dashAdmin.driver).sendKeys("AutoVehicle");
+        Cards.CardLabel(dashAdmin.driver).sendKeys(dashAdmin.cardLabelEditV);
+        Cards.CardDailyLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardDailyLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardDailyLimit(dashAdmin.driver).sendKeys(dashAdmin.cardDailyLimitEdit);
         Cards.CardEnableMonthly(dashAdmin.driver).click();
-        Cards.CardMonthlyLimit(dashAdmin.driver).sendKeys("100");
         Cards.CardEnableLimit(dashAdmin.driver).click();
-        Cards.CardMinLimit(dashAdmin.driver).sendKeys("5");
-        Cards.CardMaxLimit(dashAdmin.driver).sendKeys("10");
+        Cards.CardMaxLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardMaxLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardMaxLimit(dashAdmin.driver).sendKeys(dashAdmin.cardMaxLimitEdit);
+        Cards.CardMinLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardMinLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardMinLimit(dashAdmin.driver).sendKeys(dashAdmin.cardMinLimitEdit);
         Cards.CardTopupSchedulerEnable(dashAdmin.driver).click();
-        Cards.CardtopupAmount(dashAdmin.driver).sendKeys("10");
-        Cards.CardtopupPeriod(dashAdmin.driver).click();
-        Cards.CardtopupPeriod(dashAdmin.driver).sendKeys(Keys.ARROW_UP);
-        Cards.CardtopupPeriod(dashAdmin.driver).sendKeys(Keys.ENTER);
-        Cards.CardTopupMonthlyDay(dashAdmin.driver).click();
-        Cards.CardTopupMonthlyDay(dashAdmin.driver).sendKeys(Keys.ENTER);
-        Cards.CardOffDaySundayVehicle(dashAdmin.driver).click();
+        dashAdmin.driver.findElement(By.xpath("//input[@value='" + dashAdmin.cardOffDay1 + "']")).click();
         Cards.CardSave(dashAdmin.driver).click();
         Cards.CardEditConfirmationMessage(dashAdmin.driver).getText();
         String actual  = Cards.CardEditConfirmationMessage(dashAdmin.driver).getText();
@@ -53,18 +58,39 @@ public class EditCard {
     }
 
     @Test(priority = 1)
-    public void EditEmployeeCard() throws InterruptedException
+    public void EditEmployeeCard()
     {
         // Click on edit icon for special Employee card
         WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='RE2 - 320 - 2 - 1']//parent::tr//button[4][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[starts-with(.,'"+dashAdmin.cardLabelE+"')]//parent::tr//td[13]//span")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementView = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Edit Card')]")));
+        action.moveToElement(element1).moveToElement(elementView).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
-        Cards.CardLabel(dashAdmin.driver).sendKeys("EE");
+        Cards.CardLabel(dashAdmin.driver).sendKeys(dashAdmin.cardLabelEditE);
+        Cards.CardOverDraftLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardOverDraftLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardOverDraftLimit(dashAdmin.driver).sendKeys(dashAdmin.cardOverdraftLimitEdit);
         Cards.CardEnableDaily(dashAdmin.driver).click();
-        Cards.CardDailyLimit(dashAdmin.driver).sendKeys("10");
-        Cards.CardTopupSchedulerEnable(dashAdmin.driver).click();
-        Cards.BulkOffDaySaturdayEmp(dashAdmin.driver).click();
+        Cards.CardMonthlyLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardMonthlyLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardMonthlyLimit(dashAdmin.driver).sendKeys(dashAdmin.cardMonthlyLimitEdit);
+        Cards.CardEnableLimit(dashAdmin.driver).click();
+        Cards.CardMaxLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardMaxLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardMaxLimit(dashAdmin.driver).sendKeys(dashAdmin.cardMaxLimitEdit);
+        Cards.CardMinLimit(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        Cards.CardMinLimit(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardMinLimit(dashAdmin.driver).sendKeys(dashAdmin.cardMinLimitEdit);
+        Cards.CardCeilingTopup(dashAdmin.driver).click();
+        Cards.CardtopupAmount(dashAdmin.driver).sendKeys(Keys.CONTROL + "a" );
+        Cards.CardtopupAmount(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Cards.CardtopupAmount(dashAdmin.driver).sendKeys(dashAdmin.cardtopupSchedulerAmountEdit);
+        Cards.CardtopupPeriod(dashAdmin.driver).sendKeys(Keys.ENTER);
+        Cards.CardtopupPeriod(dashAdmin.driver).sendKeys(Keys.ARROW_DOWN);
+        Cards.CardtopupPeriod(dashAdmin.driver).sendKeys(Keys.ENTER);
+        dashAdmin.driver.findElement(By.xpath("//input[@value='" + dashAdmin.cardOffDay1 + "']")).click();
         Cards.CardSave(dashAdmin.driver).click();
         Cards.CardEditConfirmationMessage(dashAdmin.driver).getText();
         String actual  = Cards.CardEditConfirmationMessage(dashAdmin.driver).getText();

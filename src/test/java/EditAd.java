@@ -1,61 +1,69 @@
 import Pages.AdPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
+import org.testng.annotations.*;
 import java.time.Duration;
 
 
-public class EditAd {
+
+
+public class EditAd{
 
     BeforeAndAfter dashAdmin;
 
-    @BeforeMethod
-    public void OpenAd(){
+    @BeforeTest
+    public void OpenAd() throws InterruptedException {
         dashAdmin= new BeforeAndAfter();
         dashAdmin.OpenDashboard();
         ///////Scroll the menu sidebar//////////////////////
-        WebElement CampaignMenu = dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[19]/div[1]/span[1]"));
+        WebElement CampaignMenu = dashAdmin.driver.findElement(By.xpath("//body[1]/div[1]/section[1]/aside[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[20]/div[1]"));
         JavascriptExecutor je = (JavascriptExecutor) dashAdmin.driver;
         je.executeScript("arguments[0].scrollIntoView(true);",CampaignMenu);
-        CampaignMenu.click();
+        je.executeScript("arguments[0].click()", CampaignMenu);
         //////////////////////////////////////
 
         AdPage.AdLink(dashAdmin.driver).click();
+        Thread.sleep(1000);
 
     }
-    @Test(priority = 0)
-    public void CreateAd()
-    {
+    @Test
+    public void EditAd() throws InterruptedException {
         // Click on Edit icon for special ad
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoAdEdit']//parent::tr//button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+dashAdmin.adTitle+"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Ad')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         AdPage.AdTitle(dashAdmin.driver).sendKeys(Keys.CONTROL+ "a");
         AdPage.AdTitle(dashAdmin.driver).sendKeys(Keys.DELETE);
-        AdPage.AdTitle(dashAdmin.driver).sendKeys("AutoAdEdit1");
-        AdPage.AdPlacement(dashAdmin.driver).sendKeys("Invoice");
-        AdPage.AdPlacement(dashAdmin.driver).sendKeys(Keys.ENTER);
-        AdPage.AdImage(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\spring.jpg");
+        AdPage.AdTitle(dashAdmin.driver).sendKeys(dashAdmin.adTitleEdit);
+        AdPage.AdPlacement(dashAdmin.driver).click();
+        WebElement place = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.adPlacementEdit+"')]"));
+        place.click();
+        AdPage.AdImage(dashAdmin.driver).sendKeys(dashAdmin.adsImage);
+        AdPage.AdOrg(dashAdmin.driver).sendKeys(dashAdmin.adOrgEdit);
+        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.adOrgEdit+"')]"));
+        org.click();
+        AdPage.AdCampaign(dashAdmin.driver).click();
+        Thread.sleep(1000);
+        WebElement camp = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.adCampaignEdit+"')]"));
+        camp.click();
         AdPage.AdSaveButton(dashAdmin.driver).click();
         AdPage.AdEditMessage(dashAdmin.driver).getText();
         String actual  = AdPage.AdEditMessage(dashAdmin.driver).getText();
         System.out.println(actual);
-        String expected = "undefined updated successfully";
-        Assert.assertEquals(actual, expected);
+        Assert.assertTrue(actual.contains("updated successfully"));
+
     }
 
 
 
-    @AfterMethod
+    @AfterTest
     public void CloseBrowser(){
         dashAdmin.CloseDashboard();
     }

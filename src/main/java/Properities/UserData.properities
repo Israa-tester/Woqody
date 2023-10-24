@@ -1,0 +1,245 @@
+ //////////////////////////////// All data for organization////////////////////////////
+OrgNormalName= AutoNormal
+OrgTopupName= AutoTopup
+OrgEnterpriseName= Aloo aloo
+OrgFuelBackName= AutoFuelBack
+OrganizationChargeLimitTopup= 10
+OrgAddress= Mansoura,Al-Galaa
+OrganizationBalanceUpdateEnterprise= 1000
+FuelBackLimit = 1000
+FuelBackPercentageForUser= 1.5
+fromDayFualBack = 28
+toDayFualBack= 30
+
+
+    //------------------------------------Edit Org----------------------------//
+
+editOrgName= Org
+editOrgAddress = Tanta- Egypt
+editChargeLimitTopup= 155
+editEnterpriseBalance = 500
+
+editFuelBackLimit = 5000
+editFuelBackPercentage= 1
+editFromDayFualBack= 15
+editToDayFualBack= 22
+
+    //------------------Delete Org ----------------------//
+
+deleteNormalOrg = OrgNormalName + editOrgName;
+deleteTopupOrg = OrgTopupName + editOrgName;
+deleteEnterpriseOrg = OrgEnterpriseName + editOrgName;
+ deleteFuelBackOrg = OrgFuelBackName + editOrgName;
+
+    //////////////////////All data Venue page//////////////
+
+venueOrgNormal= Mashour
+venueOrgDelivery= Petrolize
+venueOrgFuelBack= AutoFuelback
+venueNormalName= Auto Normal Venue
+venueDeliveryName= Auto Delivery Venue
+venueFuelBackName= Auto FuelBack Venue
+venueCity= Tabuk
+numberWorkingShifts= 1
+workFrom= 1:00 am
+workTo= 10:33 pm
+venueLocation= FPJJ+CQ Hasarah Saudi Arabia
+
+carModel= Toyta2000
+manufactureName= Toyta
+manufacturedYear= 2020
+plateNumber= WWW - 444
+chassisNumber= ASDER2345
+DeliveryFees= 10
+tankCapacity= 50
+tankProduct= oil
+area1= Al Amal Dist.
+area2= Al Ukayshiyah Dist.
+                  -------------------------Edit Venue------------------
+
+venueNameEditD = Test
+venueCityEdit =  At Taif
+carModelEdit= Kia5050
+manufactureNameEdit= Kia
+manufacturedYearEdit= 2023
+plateNumberEdit= SSS - 777
+chassisNumberEdit= 000
+deliveryFeesEdit= 26
+tankCapacityEdit= 77
+tankProductEdit= benzene 90
+venueFuelBackEditName= Test FuelBack automation
+numberWorkingShiftsEdit = 0
+
+////////////////////////////////All data for Vendors////////////////////////////
+vendorName= Auto Vendor
+venueOfVendor= lolo
+vendorNameFuelBack= Auto FuelBack
+venueOfVendorFuelBack= dasdas
+venueFuelBackLimit = 500
+venueFuelBackPercentageForUser= 2
+venuefromDayFualBack = 30
+venuetoDayFualBack= 31
+vendorNameEdit= Test
+vendorNameFuelBackEdit= Auto Fuel Back
+venueOfVendorEdit = Balina
+vendorFuelBackLimitEdit = 1000
+vendorFuelBackPercentageForUserEdit = 5
+
+//////////////////////All data for Organization Employees////////////////////////////
+CellPhoneEmployee= 550100444
+firstNameEmployee= Ali
+lastNameEmployee = Asser
+
+
+//////////////////////All data for Card Stock//////////////
+newVehicleStock = Aloo Stock Vehicle
+newEmployeeStock = Auto Employee Test
+stockDailyLimit = 10
+stockWeeklyLimit = 100
+stockTopupAmount = 2.5
+periodDaily = Daily
+periodWeekly = Weekly
+periodMonthly = Monthly
+stockOffDay1 = Saturday
+stockOffDay2 = Monday
+topupWeeklyDay = Monday
+topupMonthlyDay = 5
+bulkCardsCount = 2
+   //----------------Edit Stock ---------------//
+editVehicleStock = Stock
+editEmployeeStock = Stock
+editStockDailyLimit = 50
+editStockMonthlyLimit = 500
+editStockTopupAmount = 4
+  //--------------------TopUp stock------------------//
+  stockTopUpAmount = 1
+  stockTopUpAmountEmp = 2
+
+    ////////////////////////////////All data for Cards////////////////////////////
+
+cardAmountV = 5.50
+stockForCardV = Auto Vehicle
+cardLabelV = ATS
+cardMonthlyLimit = 100
+cardMinLimit = 5
+cardMaxLimit = 10
+cardtopupAmount = 8
+cardOffDay1 = Sunday
+
+cardAmountE = 3.00
+stockForCardE = Auto Employee
+cardLabelE = AutoE10
+cardOverDraftLimit = 50
+cardDailyLimit= 55
+
+              ----------------------------Edit Card-----------------
+cardLabelEditV = Auto Edit
+cardLabelEditE = Auto
+cardOverdraftLimitEdit = 20
+cardDailyLimitEdit = 500
+cardMonthlyLimitEdit = 50
+cardMinLimitEdit = 30
+cardMaxLimitEdit= 200
+cardtopupSchedulerAmountEdit  = 10
+              ------------------------Upload bulk cards--------------
+fileCardLabel1= Auto43
+fileCardLabel2= Auto44
+fileCardAmount1= 2.00
+fileCardAmount2= 1.00
+                ------------------------Topup cards--------------
+cardTopUpAmount = 1.00
+cardDecutAmount = 2.00
+
+          ////////////////////////////////All data for transactions////////////////////////////
+transfromDay = 1
+transtoDay= 2
+transactionID = 1e9d9eca-2b16-4a95-bb37-de7a8323724e
+transactionType = Vehicles Card Topup
+transtatus = Success
+transPaymentMethod= Auto TopUp
+transShortID = 2300014410
+transReceiptID = Inv-98-20-08-2023-00002
+transUser = Mona Ahmed
+transPOSNumber = samsung-b34a70734a8b1c5c
+transProduct = benzene 95
+transVenueCode = 150875
+transVenueCity = Tabuk
+transEnterpriseOrg = Card enterprise
+transCardID= 844b0c77-d10e-4a78-a65e-3d0828882432
+transCardLabel = DC3
+transCardStock = 350
+
+//////////////////////All data for Offers and deals //////////////
+offerNormalTitle = Auto Normal offer
+offerWatchTitle= Auto Watch offer
+offerClickTitle= Auto Click offer
+offerDownloadTitle= Auto Download offer
+offerCat = Bank
+offerOrg = Solar Normal
+offerVenue = 01-Solar
+offerDescription = Description Offer Auto
+offerCashBackAmount = 5
+actionLinkClick = https://www.pexels.com/search/videos/nature/
+actionLinkDownload =   https://www.google.com/
+offerNormalTitleEdit = Test
+offerWatchTitleEdit= Watch Offer Auto
+offerClickTitleEdit= Auto Click offer
+offerDownloadTitleEdit= Auto Edit Download
+offerOrgEdit = Win Offer
+offerVenueEdit1=  win
+offerVenueEdit2 = QWE
+offerDescriptionEdit = Test test test
+offerCashBackAmountEdit = 2
+actionLinkClickEdit = https://www.yahoo.com/
+actionLinkDownloadEdit =   https://www.masrawy.com/
+          //--------------------------Deals--------------------//
+dealTitle= Auto Deal
+dealArabicTitle= اتوماتيك عرض
+dealGift= ERT (33)
+dealAmount= 200
+dealOrg1= Mobile
+dealOrg2= CashbackOrg
+dealVenue1= AZQ
+dealVenue2= wqq
+dealProduct1= oils
+dealProduct2= benzene 95
+dealValidUntilFrom= 10
+dealValidUntilTo= 20
+dealCongMessage= welcome message
+dealArabicCongMessage= أهلاا وسهلااا
+
+dealTitleEdit= Deal Test Auto
+dealArabicTitleEdit= ttt
+dealGiftEdit= nick (2)
+dealAmountEdit= 50
+dealOrg1Edit= Mobile
+dealOrg2Edit= NewOrg
+dealVenue1Edit= AZQ
+dealVenue2Edit= test
+dealProduct1Edit= benzene 80
+dealProduct2Edit= benzene 95
+dealValidUntilFromEdit= 15
+dealValidUntilToEdit= 25
+dealCongMessageEdit= Congratulation Message Auto Edit
+dealArabicCongMessageEdit= ومرحباااا
+
+//////////////////////All data for Ad Campaign and Ads ////////////////////////////////
+campaignName= Auto Campaign
+campaignOrg= Solar Normal
+campaignValidUntilFrom = 20
+campaignValidUntilTo = 23
+
+campaignNameEdit= Campaign Edit Auto
+campaignOrgEdit= Win Offer
+campaignValidUntilFromEdit = 17
+campaignValidUntilToEdit = 22
+/--------------------------------------Ads------------------------/
+adTitle= Auto Ad
+adPlacement= Main Page
+adOrg= Solar Normal
+adCampaign= Auto Campaign
+
+adTitleEdit= Edit Ad Auto
+adPlacementEdit= Massages
+adOrgEdit= Mashour
+adCampaignEdit= Campaign Test

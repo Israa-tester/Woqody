@@ -2,6 +2,7 @@ import Pages.OrganizationsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,9 +20,12 @@ public class AddingEmployeesForOrganization {
         dashAdmin.OpenDashboard();
         OrganizationsPage.Organizationslink(dashAdmin.driver).click();
         // Click on view icon for special enterprise organization
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='test']//parent::tr//button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.OrgEnterpriseName +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'View Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
     }
 
@@ -29,14 +33,13 @@ public class AddingEmployeesForOrganization {
     public void AddNewEmployee(){
         OrganizationsPage.EmployeesTab(dashAdmin.driver).click();
         OrganizationsPage.SingleEmployee(dashAdmin.driver).click();
-        OrganizationsPage.CellPhoneEmployee(dashAdmin.driver).sendKeys("550101456");
-        OrganizationsPage.FirstNameEmployee(dashAdmin.driver).sendKeys("Ahmed2");
-        OrganizationsPage.LastNameEmployee(dashAdmin.driver).sendKeys("Ali2");
+        OrganizationsPage.CellPhoneEmployee(dashAdmin.driver).sendKeys(dashAdmin.cellPhoneEmployee);
+        OrganizationsPage.FirstNameEmployee(dashAdmin.driver).sendKeys(dashAdmin.firstNameEmployee);
+        OrganizationsPage.LastNameEmployee(dashAdmin.driver).sendKeys(dashAdmin.lastNameEmployee);
         OrganizationsPage.SaveEmployee(dashAdmin.driver).click();
         OrganizationsPage.EmpAddingMessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.EmpAddingMessage(dashAdmin.driver).getText();
         System.out.println(actual);
-        //Test
         String expected = "User add to organization successfully";
         Assert.assertEquals(actual, expected);
 
@@ -46,7 +49,7 @@ public class AddingEmployeesForOrganization {
     public void AddBulkOfEmployee() {
         OrganizationsPage.EmployeesTab(dashAdmin.driver).click();
         OrganizationsPage.BulkOfEmployee(dashAdmin.driver).click();
-        OrganizationsPage.FileEmployee(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\BulkEmp.xlsx");
+        OrganizationsPage.FileEmployee(dashAdmin.driver).sendKeys(dashAdmin.fileEmployees);
         OrganizationsPage.EmpBulkMessage(dashAdmin.driver).getText();
         String actual  = OrganizationsPage.EmpBulkMessage(dashAdmin.driver).getText();
         System.out.println(actual);

@@ -13,15 +13,15 @@ import java.time.Duration;
 
 public class DeleteOrgs {
 
-    BeforeAndAfter dashAdmin;
+    public static BeforeAndAfter dashAdmin;
     @BeforeMethod
     public void OpenOrgPage(){
         dashAdmin= new BeforeAndAfter();
-        dashAdmin.OpenDashboard();
+       dashAdmin.OpenDashboard();
         OrganizationsPage.Organizationslink(dashAdmin.driver).click();
 
     }
-    @Test(priority = 0)
+    @Test( dependsOnMethods = { "EditNormalOrg" })
     public void DeleteNormalOrg()
     {
         // Click on Delete icon for special Org
@@ -40,7 +40,7 @@ public class DeleteOrgs {
         Assert.assertEquals(actual, expected);
     }
 
-    @Test(priority = 1)
+    @Test(dependsOnMethods = { "EditEnterpriseOrg" })
     public void DeleteEnterpriseOrg() throws InterruptedException
     {
         // Click on Delete icon for special Org
@@ -59,7 +59,7 @@ public class DeleteOrgs {
         Assert.assertEquals(actual, expected);
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = { "EditFuelBackOrg" })
     public void DeleteFuelBackOrg()
     {
         // Click on Delete icon for special Org
@@ -79,7 +79,7 @@ public class DeleteOrgs {
     }
 
 
-    @AfterMethod
+    @AfterMethod (groups = { "NormalOrg" , "TopUpOrg" ,"EnterpriseOrg" ,"FuelBackOrg" })
     public void CloseBrowser(){
         dashAdmin.CloseDashboard();
     }

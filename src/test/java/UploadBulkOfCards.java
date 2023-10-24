@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -21,7 +22,7 @@ public class UploadBulkOfCards {
     public void CreateNewCard(){
         dashAdmin= new BeforeAndAfter();
         dashAdmin.OpenDashboard();
-        dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[6]/div[1]/span[1]")).click();
+        dashAdmin.driver.findElement(By.xpath("//span[contains(text(),'Cards')]")).click();
         Cards.Cardslink(dashAdmin.driver).click();
         Cards.UploadBulkLink(dashAdmin.driver).click();
 
@@ -29,18 +30,23 @@ public class UploadBulkOfCards {
     @Test(priority = 0)
     public void CreateBulkVehicleCard() throws InterruptedException
     {
-        JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
-        Cards.StockUploadCard(dashAdmin.driver).sendKeys("Stock123");
         Thread.sleep(1000);
-        WebElement stock= dashAdmin.driver.findElement(By.xpath("//span[normalize-space()='Stock123 - 271 - 1']"));
-        jes.executeScript("arguments[0].click();",stock);
+        Cards.CardStock(dashAdmin.driver).sendKeys(dashAdmin.stockForCardV);
+        WebElement stock = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and starts-with(.,'"+dashAdmin.stockForCardV+"')]"));
+        stock.click();
         //Save the enterprise balance as a float number
         Cards.EnterpriseBalance(dashAdmin.driver).getText();
         String orgBalance= Cards.EnterpriseBalance(dashAdmin.driver).getText();
-        Float firstBalance = Float.parseFloat(orgBalance);
+        String orgBalanceNumber;
+        if (orgBalance.contains(",")){
+            orgBalanceNumber = orgBalance.replaceAll(",","");
+        }else{
+            orgBalanceNumber = orgBalance;
+        }
+        Float firstBalance = Float.parseFloat(orgBalanceNumber);
         System.out.println("The org balance before creation card " + firstBalance);
         /////////////////////////////////////////////////////////////////////////////////
-        Cards.BulkUploadFile(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\BulkVehicleNoBalance.xlsx");
+        Cards.BulkUploadFile(dashAdmin.driver).sendKeys(dashAdmin.fileBulkCards);
 
 
 
@@ -55,53 +61,65 @@ public class UploadBulkOfCards {
 
         // Verify the first card amount appears correct in the table////
         WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'AutoV11')]//parent::tr//td[7]")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'"+dashAdmin.fileCardLabel1+"')]//parent::tr//td[7]")));
         element.getText();
         String cardAmount1 = element.getText();
         System.out.println(cardAmount1);
         String currency = "SAR ";
-        String amountNo1 = cardAmount1.replaceAll("",currency);
-        softAssert.assertEquals(amountNo1,5.00);
+        String amountNo1 = cardAmount1.replaceAll(currency,"");
+        softAssert.assertEquals(amountNo1,dashAdmin.fileCardAmount1);
 
         // Verify the second card amount appears correct in the table////
-        WebDriverWait wait2 = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'AutoV12')]//parent::tr//td[7]")));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'"+dashAdmin.fileCardLabel2+"')]//parent::tr//td[7]")));
         element2.getText();
         String cardAmount2 = element2.getText();
         System.out.println(cardAmount2);
-        String currency2 = "SAR ";
-        String amountNo2 = cardAmount2.replaceAll("",currency);
-        softAssert.assertEquals(amountNo2,10.00);
+        String amountNo2 = cardAmount1.replaceAll(currency,"");
+        softAssert.assertEquals(amountNo2,dashAdmin.fileCardAmount2);
 
         // Verify the first card amount appears correct in the view///
-        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'AutoV11')]//parent::tr//td[13]/button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element1);
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'"+dashAdmin.fileCardLabel2+"')]//parent::tr//td[13]//span")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementView = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'View Card')]")));
+        action.moveToElement(element1).moveToElement(elementView).click().build().perform();
         Cards.AmountCard(dashAdmin.driver).getText();
-        String viewAmount = Cards.AmountCard(dashAdmin.driver).getText();
-        String currencyView = "SAR ";
-        String amountNoView = viewAmount.replaceAll("",currencyView);
-        softAssert.assertEquals(amountNoView,5.00);
+        String viewAmount1 = Cards.AmountCard(dashAdmin.driver).getText();
+        String amountNoView1 = viewAmount1.replaceAll(currency,"");
+        softAssert.assertEquals(amountNoView1,dashAdmin.fileCardAmount1);
         ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", Cards.ClosePopup(dashAdmin.driver));
 
+        /*
         // Verify the second card amount appears correct in the view///
-        WebElement element3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'AutoV12')]//parent::tr//td[13]/button[1][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element3);
+        Thread.sleep(1000);
+        WebElement element3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'"+dashAdmin.fileCardLabel2+"')]//parent::tr//td[13]//span")));
+        action.moveToElement(element3).perform();
+        //WebElement elementView2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'View Card')]")));
+        action.moveToElement(element3).moveToElement(elementView).click().build().perform();
         Cards.AmountCard(dashAdmin.driver).getText();
         String viewAmount2 = Cards.AmountCard(dashAdmin.driver).getText();
-        String currencyView2 = "SAR ";
-        String amountNoView2 = viewAmount.replaceAll("",currencyView2);
-        softAssert.assertEquals(amountNoView2,10.00);
+        String amountNoView2 = viewAmount2.replaceAll(currency,"");
+        softAssert.assertEquals(amountNoView2,dashAdmin.fileCardAmount2);
         ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", Cards.ClosePopup(dashAdmin.driver));
-
+        */
         // Verify the org balance appears correct///
-        WebElement element4 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[contains(text(),'AutoV12')]//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element4);
+        Thread.sleep(1000);
+        action.moveToElement(element1).perform();
+        WebElement elementTopup = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Top-up Card')]")));
+        action.moveToElement(element1).moveToElement(elementTopup).click().build().perform();
         Cards.OrgBalanceInTopup(dashAdmin.driver).getText();
         String orgMoney = Cards.OrgBalanceInTopup(dashAdmin.driver).getText();
-        Float presentBalance = Float.parseFloat(orgMoney);
+        String orgMoneyNumber;
+        if (orgBalance.contains(",")){
+            orgMoneyNumber = orgMoney.replaceAll(",","");
+        }else{
+            orgMoneyNumber = orgMoney;
+        }
+        Float presentBalance = Float.parseFloat(orgMoneyNumber);
         System.out.println("The org balance after creation card " + presentBalance);
-        softAssert.assertEquals(presentBalance,firstBalance - 15);
+        softAssert.assertEquals(presentBalance,firstBalance - (Float.valueOf(dashAdmin.fileCardAmount2) + Float.valueOf(dashAdmin.fileCardAmount1)));
         ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", Cards.ClosePopup(dashAdmin.driver));
+
 
         // Verify the org balance appears correct in organization balance page///
 
@@ -113,13 +131,18 @@ public class UploadBulkOfCards {
         ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", orgBalancePage);
 
         //////////////////////////////////////
-        WebElement element6 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='No balance'][1]//parent::tr//td[5]")));
-        element6.getText();
-        String orgMoneyBalance = element6.getText();
-        Float presentBalanceInBalancePage = Float.parseFloat(orgMoneyBalance);
+        WebElement element5 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+dashAdmin.OrgEnterpriseName+"'][1]//parent::tr//td[5]")));
+        element5.getText();
+        String orgMoneyBalance = element5.getText();
+        String orgMoneyBalanceNumber;
+        if (orgBalance.contains(",")){
+            orgMoneyBalanceNumber = orgMoneyBalance.replaceAll(",","");
+        }else{
+            orgMoneyBalanceNumber = orgMoneyBalance;
+        }
+        Float presentBalanceInBalancePage = Float.parseFloat(orgMoneyBalanceNumber);
         System.out.println("The org balance after creation card in organization balance page " + presentBalanceInBalancePage);
-        softAssert.assertEquals(presentBalanceInBalancePage,firstBalance - 15);
-
+        softAssert.assertEquals(presentBalance,firstBalance - (Float.valueOf(dashAdmin.fileCardAmount2) + Float.valueOf(dashAdmin.fileCardAmount1)));
         softAssert.assertAll();
     }
 

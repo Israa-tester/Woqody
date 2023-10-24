@@ -12,21 +12,21 @@ public class VendorsPage {
 	public static WebElement  Vendorlink (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[4]/span[1]/a[1]"));
+		element = driver.findElement(By.xpath("//a[@href='/vendors']"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  NewVendorlink (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[1]/button[1]"));
+		element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-primary']"));
 		return element;		
 	}
 	//-------------------------------------------------------------------------------------------
 	public static WebElement  SelectVenue (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//input[@id='vendors_form_venueId']"));
+		element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
 		return element;		
 	}
     //-----------------------------------------------------------------------------------------
@@ -37,7 +37,14 @@ public class VendorsPage {
 		return element;		
 	}
     //-----------------------------------------------------------------------------------------
-	public static WebElement  VendorSave (WebDriver driver ) 
+	public static WebElement  VendorPaymentMethod (WebDriver driver )
+
+	{
+		element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-show-arrow ant-select-show-search']"));
+		return element;
+	}
+	//-----------------------------------------------------------------------------------------
+	public static WebElement  VendorSave (WebDriver driver )
 
 	{
 		element = driver.findElement(By.xpath("//button[normalize-space()='Save']"));
@@ -94,31 +101,12 @@ public class VendorsPage {
 		return element;		
 	}
     //-----------------------------------------------------------------------------------------
-	public static WebElement  VendorSaveFuelBack (WebDriver driver )
 
-	{
-		element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[8]/div[1]/div[1]/span[1]/button[1]"));
-		return element;
-	}
-	//-----------------------------------------------------------------------------------------
-      ///// For Edit Vendor////
-	public static WebElement  EditIconVendorFuelBack (WebDriver driver )
-
-	{
-		element = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div[1]/div[3]/div[2]/div/div/div/div/div[1]/div[2]/table/tbody/tr[5]/td[9]/button[2]"));
-		return element;
-	}
-	public static WebElement  EditIconVendorNormal (WebDriver driver )
-
-	{
-		element = driver.findElement(By.xpath("//table/tbody/tr[3]/td[9]/button[2]"));
-		return element;
-	}
 	//////////////////////////Delete Vendor//////////////////////////////////////
 	//------------------------------------------------------------------------------------------
 
 	public static WebElement DeleteButton(WebDriver driver) {
-		element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+		element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-dangerous']"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------

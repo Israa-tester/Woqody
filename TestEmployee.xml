@@ -1,0 +1,83 @@
+<suite name="EmployeeSuit">
+    <listeners>
+        <listener class-name="Listener"></listener>
+    </listeners>
+    <test name="EmployeeStock">
+        <classes>
+            <class name="CreateOrg">
+                <methods>
+                    <include name="CreateEnterpriseOrg"/>
+                </methods>
+            </class>
+            <class name="AddingEmployeesForOrganization">
+                <methods>
+                    <include name="AddNewEmployee"/>
+                    <include name="AddBulkOfEmployee"/>
+                </methods>
+            </class>
+            <class name="CreateStock">
+                <methods>
+                    <include name="CreateVehicleStock"/>
+                </methods>
+            </class>
+            <class name="EditStock">
+                <methods>
+                    <include name="EditVehicleStock"/>
+                </methods>
+            </class>
+            <class name="DeleteStock">
+                <methods>
+                    <include name="DeleteVehicleStock"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="SingleVehicleCards">
+        <classes>
+            <class name="CreateStock">
+                <methods>
+                    <include name="CreateVehicleStock"/>
+                </methods>
+            </class>
+            <class name="CreateSingleCards">
+                <methods>
+                    <include name="CreateEmployeeCard"/>
+                </methods>
+            </class>
+            <class name="TopUpCards">
+                <methods>
+                    <include name="TopupEmployeeCard"/>
+                    <include name="DeductEmployeeCard"/>
+                </methods>
+            </class>
+            <class name="EditCard">
+                <methods>
+                    <include name="EditEmployeeCard"/>
+                </methods>
+            </class>
+            <class name="DeleteCard">
+                <methods>
+                    <include name="DeleteEmployeeCard"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="BulkCards">
+        <classes>
+            <class name="CreateBulkOfCards">
+                <methods>
+                    <include name="CreateEmployeeCard"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="TopUpStock">
+        <classes>
+            <class name="TopUpCardStock">
+                <methods>
+                    <include name="TopupEmployeeStock"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

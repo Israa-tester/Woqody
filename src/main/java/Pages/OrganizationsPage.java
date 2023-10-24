@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class OrganizationsPage 
 {
+	String xpathMonthFualBack = "(//table[@class='ant-picker-content'])[1]//td";
 	private static WebElement element = null;
 	//-----------------------------------------------------------------------------------	
 	public static WebElement  Organizationslink (WebDriver driver)
@@ -40,7 +41,7 @@ public class OrganizationsPage
 	public static WebElement  NewOrganizationFuelBack (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//div[@class='ant-legacy-form-item-control']//button[@role='switch']"));
+		element = driver.findElement(By.id("orgs_form_cashBackIsActive"));
 		return element;		
 	}
 	
@@ -56,7 +57,7 @@ public class OrganizationsPage
 	public static WebElement  Organizationname (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//div[@class='flex column']//div[1]//div[1]//div[2]//div[1]//span[1]//input[1]"));
+		element = driver.findElement(By.id("orgs_form_name"));
 		return element;		
 	}
 	
@@ -64,15 +65,22 @@ public class OrganizationsPage
 	public static WebElement  Organizationaddress (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("(//input[contains(@type,'text')])[7]"));
+		element = driver.findElement(By.id("orgs_form_address"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  OrganizationEnterpriseBalance (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//div[@role='tablist']"));
+		element = driver.findElement(By.xpath("(//div[normalize-space()=\"Enterprise organization's Balance\"])[1]"));
 		return element;		
+	}
+	//-----------------------------------------------------------------------------------------
+	public static WebElement  OrganizationEditEnterpriseBalance (WebDriver driver )
+
+	{
+		element = driver.findElement(By.xpath("//body/div/div[@class='ant-modal-root']/div[@role='dialog']/div[@role='document']/div[@class='ant-modal-content']/div[@class='ant-modal-body']/form[@class='ant-legacy-form ant-legacy-form-horizontal']/div[@role='tablist']/div[2]/div[1]"));
+		return element;
 	}
 	//-----------------------------------------------------------------------------------------
 	public static WebElement  OrganizationBalanceUpdate (WebDriver driver ) 
@@ -100,7 +108,7 @@ public class OrganizationsPage
 	public static WebElement  OrganizationChargeLimit (WebDriver driver ) 
 
 	{
-		element = driver.findElement(By.xpath("//div[@class='ant-input-number']//input[@role='spinbutton']"));
+		element = driver.findElement(By.id("orgs_form_topupChargeLimit"));
 		return element;		
 	}
 	//-----------------------------------------------------------------------------------------
@@ -206,7 +214,7 @@ public class OrganizationsPage
 	//------------------------------------------------------------------------------------------
 
 	public static WebElement InformationTab(WebDriver driver) {
-		element = driver.findElement(By.xpath("//div[@id='rc-tabs-0-tab-3']"));
+		element = driver.findElement(By.xpath("(//div[@class='ant-tabs-tab'])[1]"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------
@@ -249,7 +257,7 @@ public class OrganizationsPage
 	}
 	//------------------------------------------------------------------------------------------
 	public static WebElement BulkOfEmployee(WebDriver driver) {
-		element = driver.findElement(By.xpath("//div[@class='ant-drawer ant-drawer-right ant-drawer-open drawer-btn-component']//button[2]"));
+		element = driver.findElement(By.xpath("//div[@class='ant-modal-root']//button[2]//span[1]"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------
@@ -264,12 +272,12 @@ public class OrganizationsPage
 	}
 	//------------------------------------------------------------------------------------------
 	public static WebElement LastNameEmployee(WebDriver driver) {
-		element = driver.findElement(By.xpath("//input[@id='update-user_firstName']"));
+		element = driver.findElement(By.xpath("//input[@id='update-user_lastName']"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------
 	public static WebElement FirstNameEmployee(WebDriver driver) {
-		element = driver.findElement(By.xpath("//input[@id='update-user_lastName']"));
+		element = driver.findElement(By.xpath("//input[@id='update-user_firstName']"));
 		return element;
 	}
 	//------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 import Pages.CardStockPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,17 +17,21 @@ public class DeleteStock {
     public void OpenStockPage(){
         dashAdmin= new BeforeAndAfter();
         dashAdmin.OpenDashboard();
-        dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[6]/div[1]/span[1]")).click();
+        dashAdmin.driver.findElement(By.xpath("//span[contains(text(),'Cards')]")).click();
         CardStockPage.CardStocklink(dashAdmin.driver).click();
+
 
     }
     @Test(priority = 0)
     public void DeleteVehicleStock()
     {
-        // Click on edit icon for special Vehicle Stock
+        // Click on delete icon for special Stock
         WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoVehicleV1 - 346 - 1']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[starts-with(.,'"+dashAdmin.newVehicleStock+"')]//parent::tr//td[@class='ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first']")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         CardStockPage.DeleteButton(dashAdmin.driver).click();
         CardStockPage.StockDeleteMessage(dashAdmin.driver).getText();
@@ -42,8 +46,11 @@ public class DeleteStock {
     {
         // Click on edit icon for special Employee stock
         WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='AutoEmployeeEmployeeAutoS - 346 - 2']//parent::tr//button[3][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[starts-with(.,'"+dashAdmin.newEmployeeStock+"')]//parent::tr//td[@class='ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first']")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element1).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Delete')])[1]")));
+        action.moveToElement(element1).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
         CardStockPage.DeleteButton(dashAdmin.driver).click();
         CardStockPage.StockDeleteMessage(dashAdmin.driver).getText();

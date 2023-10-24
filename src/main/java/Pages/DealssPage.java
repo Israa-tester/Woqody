@@ -9,7 +9,7 @@ public class DealssPage {
 
     //------------------------------------------------------------------------------------------
     public static WebElement DealsLink(WebDriver driver) {
-        element = driver.findElement(By.xpath("//a[@href='/deals']"));
+        element = driver.findElement(By.xpath("//li[@title='Deals']"));
         return element;
     }
     public static WebElement CreateNewDeal(WebDriver driver) {
@@ -25,19 +25,19 @@ public class DealssPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement DealTitle(WebDriver driver) {
-        element = driver.findElement(By.xpath("(//input[@type='text'])[4]"));
+        element = driver.findElement(By.id("deals_form_title"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement DealArabicTiltle(WebDriver driver) {
-        element = driver.findElement(By.xpath("(//input[@type='text'])[5]"));
+        element = driver.findElement(By.id("deals_form_titleAr"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement DealGift(WebDriver driver) {
-        element = driver.findElement(By.xpath("(//input[@role='combobox'])[3]"));
+        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
         return element;
     }
 
@@ -55,13 +55,13 @@ public class DealssPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement DealAmount(WebDriver driver) {
-        element = driver.findElement(By.xpath("//input[@role='spinbutton']"));
+        element = driver.findElement(By.id("deals_form_rules.value"));
         return element;
     }
 
     //-----------------------------------------------------------------------------------------
     public static WebElement DealAllVenue(WebDriver driver) {
-        element = driver.findElement(By.xpath("(//button[contains(@role,'switch')])[2]"));
+        element = driver.findElement(By.xpath("//form[contains(@class,'ant-legacy-form ant-legacy-form-horizontal')]//button[contains(@role,'switch')]"));
         return element;
     }
 
@@ -73,7 +73,7 @@ public class DealssPage {
 
     //-----------------------------------------------------------------------------------------
     public static WebElement DealVenues(WebDriver driver) {
-        element = driver.findElement(By.xpath("(//div)[235]"));
+        element = driver.findElement(By.xpath("(//div)[215]"));
         return element;
     }
 
@@ -122,7 +122,7 @@ public class DealssPage {
     }
     //-----------------------------------------------------------------------------------------
     public static WebElement EditConfirmMessage(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[contains(text(),'AutoDeal One updated successfully')]"));
+        element = driver.findElement(By.xpath("//span[contains(text(),' updated successfully')]"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
@@ -130,11 +130,11 @@ public class DealssPage {
     //------------------------------------------------------------------------------------------
 
     public static WebElement DeleteButton(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+        element = driver.findElement(By.xpath("//button[contains(@class,'ant-btn ant-btn-default ant-btn-dangerous')]"));
         return element;
     }
     //------------------------------------------------------------------------------------------
-    public static WebElement OfferDeleteMessage(WebDriver driver) {
+    public static WebElement DealDeleteMessage(WebDriver driver) {
         element = driver.findElement(By.xpath("//span[normalize-space()='Row deleted successfully']"));
         return element;
     }

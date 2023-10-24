@@ -10,35 +10,35 @@ public class CardStockPage {
     public static WebElement  CardStocklink (WebDriver driver )
 
     {
-        element = driver.findElement(By.xpath("//body[1]/div[1]/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[6]/ul[1]/li[2]/span[1]/a[1]"));
+        element = driver.findElement(By.xpath("//a[@href='/cards-stocks']"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
     public static WebElement  NewCardStock (WebDriver driver )
 
     {
-        element = driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[1]/button[1]"));
+        element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-primary']"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
     public static WebElement  CardStockTitle (WebDriver driver )
 
     {
-        element = driver.findElement(By.xpath("//input[@id='stocks_form_title']"));
+        element = driver.findElement(By.id("stocks_form_title"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
     public static WebElement  StockType (WebDriver driver )
 
     {
-       element = driver.findElement(By.xpath("//input[@id='stocks_form_type']"));
+       element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-show-arrow']"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
     public static WebElement  CardStockOrg (WebDriver driver )
 
     {
-        element = driver.findElement(By.xpath("//div[@class='ant-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search']//input[@role='combobox']"));
+        element = driver.findElement(By.xpath("(//input[@role='combobox'])[3]"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ public class CardStockPage {
     public static WebElement  StockEnableDaily (WebDriver driver )
 
     {
-        element = driver.findElement(By.xpath("//button[@id='stocks_form_isCardsStocksDailyLimitEnabled']"));
+        element = driver.findElement(By.xpath("(//button[@role='switch'])[2]"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ public class CardStockPage {
     public static WebElement  StockCeilingTopup (WebDriver driver )
 
     {
-        element = driver.findElement(By.xpath("//span[contains(text(),'Ceiling Top-Up Amount')]"));
+        element = driver.findElement(By.xpath("//label[@class='ant-radio-button-wrapper']"));
         return element;
     }
     //-----------------------------------------------------------------------------------------
@@ -126,13 +126,7 @@ public class CardStockPage {
         return element;
     }
     //-----------------------------------------------------------------------------------------
-    public static WebElement  StockOffDayMonday (WebDriver driver )
 
-    {
-        element = driver.findElement(By.xpath("//body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[6]/div[2]/div[1]/div[1]/div[1]/span[1]/div[1]/div[1]/div[3]/label[1]/span[1]/input[1]"));
-        return element;
-    }
-    //-----------------------------------------------------------------------------------------
     public static WebElement  StockSave (WebDriver driver )
 
     {
@@ -165,7 +159,7 @@ public class CardStockPage {
     //------------------------------------------------------------------------------------------
 
     public static WebElement DeleteButton(WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[normalize-space()='Delete']"));
+        element = driver.findElement(By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-dangerous']"));
         return element;
     }
     //------------------------------------------------------------------------------------------

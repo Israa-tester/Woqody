@@ -1,5 +1,6 @@
 import Pages.VenuesPage;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -22,10 +23,13 @@ public class EditVenue {
     @Test(priority = 0)
     public void EditNormalVenue() throws InterruptedException
     {
-        // Click on edit icon for special normal venue
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='venue test']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Edit icon for special Normal venue
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.venueNormalName +"']//parent::tr//td[8]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Organization')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
 
         VenuesPage.VenueName(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
@@ -34,10 +38,7 @@ public class EditVenue {
         VenuesPage.VenueCity(dashAdmin.driver).sendKeys("At Taif / الطائف");
         VenuesPage.VenueCity(dashAdmin.driver).sendKeys(Keys.ARROW_DOWN);
         VenuesPage.VenueCity(dashAdmin.driver).sendKeys(Keys.ENTER);
-        VenuesPage.VenueLocation(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
-        VenuesPage.VenueLocation(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VenuesPage.VenueLocation(dashAdmin.driver).sendKeys("H77W+29Q، شارع وادي مريخ (أم الذر)، الشروق، Ash Shorooq, Jeddah 23365, Saudi Arabia");
-        VenuesPage.VenueLocation(dashAdmin.driver).sendKeys(Keys.ENTER);
+
         Thread.sleep(2000);
         VenuesPage.Venuesave(dashAdmin.driver).click();
         VenuesPage.VenueEditconfirmationmessage(dashAdmin.driver).getText();
@@ -49,40 +50,79 @@ public class EditVenue {
     @Test(priority = 1)
     public void EditDeliveryVenue() throws InterruptedException
     {
-        // Click on edit icon for special delivery venue
-        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='Map-delivery']//parent::tr//button[2][@type='button']")));
-        ((JavascriptExecutor)dashAdmin.driver).executeScript("arguments[0].click();", element);
+        // Click on Edit icon for special delivery venue
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='"+ dashAdmin.venueDeliveryName +"']//parent::tr//td[12]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Venue')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
         /////////////////////////////////////////////////////////////////////////
 
-        VenuesPage.VenueName(dashAdmin.driver).sendKeys("SS");
-        VenuesPage.VenueCity(dashAdmin.driver).sendKeys(" Tabuk / تبوك");
-        Thread.sleep(2000);
-        VenuesPage.VenueCity(dashAdmin.driver).sendKeys(Keys.ENTER);
-        VenuesPage.CarModel(dashAdmin.driver).sendKeys("S1");
-        VenuesPage.ManufactureName(dashAdmin.driver).sendKeys("S2");
-        VenuesPage.ManufaturedYear(dashAdmin.driver).sendKeys("2020");
-        VenuesPage.ManufaturedYear(dashAdmin.driver).sendKeys(Keys.ENTER);
-        VenuesPage.PlateNumber(dashAdmin.driver).sendKeys("S4");
-        VenuesPage.ChassisNumber(dashAdmin.driver).sendKeys("S5");
+        VenuesPage.VenueName(dashAdmin.driver).sendKeys(dashAdmin.venueNameEditD);
+        VenuesPage.VenueCity(dashAdmin.driver).sendKeys(Keys.CONTROL+ "a");
+        VenuesPage.VenueCity(dashAdmin.driver).sendKeys(Keys.DELETE);
+        Thread.sleep(1000);
+        dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'" + dashAdmin.venueCityEdit + "')]")).click();
+        VenuesPage.CarModel(dashAdmin.driver).sendKeys(Keys.CONTROL+ "a");
+        VenuesPage.CarModel(dashAdmin.driver).sendKeys(Keys.DELETE);
+        VenuesPage.CarModel(dashAdmin.driver).sendKeys(dashAdmin.carModelEdit);
+        VenuesPage.ManufactureName(dashAdmin.driver).sendKeys(dashAdmin.manufactureNameEdit);
+        VenuesPage.ManufacturedYear(dashAdmin.driver).sendKeys(Keys.CONTROL+ "a");
+        VenuesPage.ManufacturedYear(dashAdmin.driver).sendKeys(Keys.DELETE);
+        VenuesPage.ManufacturedYear(dashAdmin.driver).sendKeys(dashAdmin.manufacturedYearEdit);
+        VenuesPage.ManufacturedYear(dashAdmin.driver).sendKeys(Keys.ENTER);
+        VenuesPage.PlateNumber(dashAdmin.driver).sendKeys(Keys.CONTROL+ "a");
+        VenuesPage.PlateNumber(dashAdmin.driver).sendKeys(Keys.DELETE);
+        VenuesPage.PlateNumber(dashAdmin.driver).sendKeys(dashAdmin.plateNumberEdit);
+        VenuesPage.ChassisNumber(dashAdmin.driver).sendKeys(dashAdmin.chassisNumberEdit);
         VenuesPage.DeliveryFees(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         VenuesPage.DeliveryFees(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VenuesPage.DeliveryFees(dashAdmin.driver).sendKeys("10");
+        VenuesPage.DeliveryFees(dashAdmin.driver).sendKeys(dashAdmin.deliveryFeesEdit);
+        VenuesPage.TankCapacity(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
         VenuesPage.TankCapacity(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VenuesPage.TankCapacity(dashAdmin.driver).sendKeys(Keys.DELETE);
-        VenuesPage.TankCapacity(dashAdmin.driver).sendKeys("20");
-        VenuesPage.TankProduct(dashAdmin.driver).sendKeys("benzene 90");
+        VenuesPage.TankCapacity(dashAdmin.driver).sendKeys(dashAdmin.tankCapacityEdit);
+        VenuesPage.TankProduct(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        VenuesPage.TankProduct(dashAdmin.driver).sendKeys(Keys.DELETE);
+        VenuesPage.TankProduct(dashAdmin.driver).sendKeys(dashAdmin.tankProductEdit);
         Thread.sleep(2000);
         VenuesPage.TankProduct(dashAdmin.driver).sendKeys(Keys.ENTER);
-        /*VenuesPage.CoverageArea(dashAdmin.driver).click();
+        VenuesPage.CoverageArea(dashAdmin.driver).click();
         Thread.sleep(2000);
-        VenuesPage.CoverageArea(dashAdmin.driver).sendKeys(Keys.ENTER);
+        dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.area1+"')]")).click();
         VenuesPage.Venuesave(dashAdmin.driver).click();
-        VenuesPage.Venuesaveconfirmationmessage(dashAdmin.driver).getText();
-        String actual  = VenuesPage.Venuesaveconfirmationmessage(dashAdmin.driver).getText();
+        VenuesPage.VenueEditconfirmationmessage(dashAdmin.driver).getText();
+        String actual  = VenuesPage.VenueEditconfirmationmessage(dashAdmin.driver).getText();
         System.out.println(actual);
-        String expected = "New venue created successfully";
-        Assert.assertEquals(actual, expected);*/
+        String expected = "venue updated successfully";
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(priority = 1)
+    public void EditFuelBackVenue() throws InterruptedException {
+
+        // Click on Edit icon for special fuelBack venue
+        WebDriverWait wait = new WebDriverWait(dashAdmin.driver, Duration.ofSeconds(20));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='" + dashAdmin.venueFuelBackName + "']//parent::tr//td[12]")));
+        Actions action = new Actions(dashAdmin.driver);
+        action.moveToElement(element2).perform();
+        WebElement elementEdit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Edit Venue')])[1]")));
+        action.moveToElement(element2).moveToElement(elementEdit).click().build().perform();
+        /////////////////////////////////////////////////////////////////////////
+        Thread.sleep(500);
+        VenuesPage.VenueName(dashAdmin.driver).sendKeys(Keys.CONTROL+ "a");
+        VenuesPage.VenueName(dashAdmin.driver).sendKeys(Keys.DELETE);
+        VenuesPage.VenueName(dashAdmin.driver).sendKeys(dashAdmin.venueFuelBackEditName);
+        VenuesPage.NumberWorkingShifts(dashAdmin.driver).sendKeys(Keys.CONTROL + "a");
+        VenuesPage.NumberWorkingShifts(dashAdmin.driver).sendKeys(Keys.DELETE);
+        VenuesPage.NumberWorkingShifts(dashAdmin.driver).sendKeys(dashAdmin.numberWorkingShiftsEdit);
+        VenuesPage.Venuesave(dashAdmin.driver).click();
+        VenuesPage.VenueEditconfirmationmessage(dashAdmin.driver).getText();
+        String actual  = VenuesPage.VenueEditconfirmationmessage(dashAdmin.driver).getText();
+        System.out.println(actual);
+        String expected = "venue updated successfully";
+        Assert.assertEquals(actual, expected);
+
     }
 
     @AfterMethod

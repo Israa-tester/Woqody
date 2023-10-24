@@ -1,0 +1,20 @@
+<suite name="AdsSuit">
+    <listeners>
+        <listener class-name="Listener"/>
+    </listeners>
+    <!-- <test name="AdCampaign">
+         <classes>
+             <class name="CreateCampaign"/>
+             <class name="EditAdCampaign"/>
+             <class name="DeleteAdCampaign"/>
+         </classes>
+     </test> -->
+     <test name="Ads">
+         <classes>
+       <!-- <class name="CreateCampaign"/> -->
+       <class name="CreateAd"/>
+       <class name="EditAd"/>
+       <class name="DeleteAd"/>
+   </classes>
+</test> -->
+</suite>

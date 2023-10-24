@@ -18,29 +18,33 @@ public class CreateAd {
         dashAdmin= new BeforeAndAfter();
         dashAdmin.OpenDashboard();
         ///////Scroll the menu sidebar//////////////////////
-        WebElement CampaignMenu = dashAdmin.driver.findElement(By.xpath("//body/div[@id='root']/section[1]/section[1]/aside[1]/div[1]/div[1]/ul[1]/li[19]/div[1]/span[1]"));
+        WebElement CampaignMenu = dashAdmin.driver.findElement(By.xpath("//body[1]/div[1]/section[1]/aside[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[20]/div[1]"));
         JavascriptExecutor je = (JavascriptExecutor) dashAdmin.driver;
         je.executeScript("arguments[0].scrollIntoView(true);",CampaignMenu);
-        CampaignMenu.click();
+        je.executeScript("arguments[0].click()", CampaignMenu);
         //////////////////////////////////////
 
         AdPage.AdLink(dashAdmin.driver).click();
+        dashAdmin.driver.navigate().refresh();
 
     }
     @Test(priority = 0)
-    public void CreateAd()
-    {
+    public void CreateAd() throws InterruptedException {
         JavascriptExecutor jes = (JavascriptExecutor) dashAdmin.driver;
         jes.executeScript("arguments[0].scrollIntoView(true);",AdPage.CreateNewAd(dashAdmin.driver));
         jes.executeScript("arguments[0].click()",AdPage.CreateNewAd(dashAdmin.driver));
-        AdPage.AdTitle(dashAdmin.driver).sendKeys("AutomateAd");
-        AdPage.AdPlacement(dashAdmin.driver).sendKeys("Main Page");
-        AdPage.AdPlacement(dashAdmin.driver).sendKeys(Keys.ENTER);
-        AdPage.AdImage(dashAdmin.driver).sendKeys("C:\\Users\\ag\\Desktop\\spring.jpg");
-        AdPage.AdOrg(dashAdmin.driver).sendKeys("regression test");
-        AdPage.AdOrg(dashAdmin.driver).sendKeys(Keys.ENTER);
-        AdPage.AdCampaign(dashAdmin.driver).sendKeys("test");
-        AdPage.AdCampaign(dashAdmin.driver).sendKeys(Keys.ENTER);
+        AdPage.AdTitle(dashAdmin.driver).sendKeys(dashAdmin.adTitle);
+        AdPage.AdPlacement(dashAdmin.driver).click();
+        WebElement place = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.adPlacement+"')]"));
+        place.click();
+        AdPage.AdImage(dashAdmin.driver).sendKeys(dashAdmin.adsImage);
+        AdPage.AdOrg(dashAdmin.driver).sendKeys(dashAdmin.adOrg);
+        WebElement org = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.adOrg+"')]"));
+        org.click();
+        AdPage.AdCampaign(dashAdmin.driver).click();
+        Thread.sleep(1000);
+        WebElement camp = dashAdmin.driver.findElement(By.xpath("//div[contains(@class,'ant-select-item-option-content') and contains(text(),'"+dashAdmin.adCampaign+"')]"));
+        camp.click();
         AdPage.AdSaveButton(dashAdmin.driver).click();
         AdPage.AdConfirmationMessage(dashAdmin.driver).getText();
         String actual  = AdPage.AdConfirmationMessage(dashAdmin.driver).getText();

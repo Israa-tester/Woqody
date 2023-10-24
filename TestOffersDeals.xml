@@ -1,0 +1,88 @@
+<suite name="OffersDealsSuit">
+    <listeners>
+        <listener class-name="Listener"></listener>
+    </listeners>
+    <test name="NormalOffer">
+        <classes>
+            <class name="CreateOffers">
+                <methods>
+                    <include name="CreateNormalOffer"/>
+                </methods>
+            </class>
+            <class name="EditOffers">
+                <methods>
+                    <include name="EditNormalOffer"/>
+                </methods>
+            </class>
+            <class name="DeleteOffer">
+                <methods>
+                    <include name="DeleteNormalOffer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="WatchWinOffer">
+        <classes>
+            <class name="CreateOffers">
+                <methods>
+                    <include name="CreateWatchWinOffer"/>
+                </methods>
+            </class>
+            <class name="EditOffers">
+                <methods>
+                    <include name="EditWatchWinOffer"/>
+                </methods>
+            </class>
+            <class name="DeleteOffer">
+                <methods>
+                    <include name="DeleteWatchWinOffer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="CickWinOffer">
+        <classes>
+            <class name="CreateOffers">
+                <methods>
+                    <include name="CreateClickWinOffer"/>
+                </methods>
+            </class>
+            <class name="EditOffers">
+                <methods>
+                    <include name="EditClickWinOffer"/>
+                </methods>
+            </class>
+            <class name="DeleteOffer">
+                <methods>
+                    <include name="DeleteClickWinOffer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="DownloadWinOffer">
+        <classes>
+            <class name="CreateOffers">
+                <methods>
+                    <include name="CreateDownloadWinOffer"/>
+                </methods>
+            </class>
+            <class name="EditOffers">
+                <methods>
+                    <include name="EditDownloadWinOffer"/>
+                </methods>
+            </class>
+            <class name="DeleteOffer">
+                <methods>
+                    <include name="CreateDownloadWinOffer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Deals">
+        <classes>
+            <class name="CreateDeal"/>
+            <class name="EditDeal"/>
+            <class name="DeleteDeal"/>
+        </classes>
+    </test>
+</suite>
